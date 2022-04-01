@@ -3,3 +3,4 @@
 *.csv
 data/
 *.xlsx
+generated_rdf_graphs/
