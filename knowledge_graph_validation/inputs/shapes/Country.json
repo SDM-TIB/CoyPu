@@ -1,0 +1,24 @@
+{
+    "name": "Country",
+    "targetDef": {
+        "query": "SELECT ?x WHERE {?x a coy:Country}",
+        "class": "coy:Country"
+    },
+    "prefix": {
+        "coy": "<https://schema.coypu.org/>"
+    },
+    "constraintDef": {
+        "conjunctions": [
+            [
+                {
+                    "path": "coy:isPartOfContinent",
+                    "min": 1
+                },
+                {
+                    "path": "coy:isPartOfContinent",
+                    "max": 1
+                }
+            ]
+        ]
+    }
+}

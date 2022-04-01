@@ -1,0 +1,5 @@
+SELECT ?s WHERE {
+  SERVICE <https://labs.tib.eu/sdm/coypu-endpoint/sparql> {
+    ?s a <https://schema.coypu.org/Disaster> 
+    }
+} LIMIT 10

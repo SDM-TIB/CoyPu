@@ -1,0 +1,5 @@
+.vscode
+*.nt
+*.csv
+data/
+*.xlsx

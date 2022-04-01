@@ -1,0 +1,21 @@
+{
+    "name": "Disaster",
+    "targetDef": {
+        "query": "SELECT ?x WHERE {?x a coy:Disaster}",
+        "class": "coy:Disaster"
+    },
+    "prefix": {
+        "coy": "<https://schema.coypu.org/>"
+    },
+    "constraintDef": {
+        "conjunctions": [
+            [
+                {
+                    "path": "coy:hasLocation",
+                    "min": 1,
+                    "shape": "Country"
+                }
+            ]
+        ]
+    }
+}
