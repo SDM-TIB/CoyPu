@@ -22,7 +22,28 @@ functions_pool = {"reverseString":"", "toLower":"", "replaceExactMatch":"", "fal
     "concat2": "", "falcon_entity_function": "",}
 
 
-### Non-injective, surjective 
+### Non-injective, surjective
+def controls_if():
+    # bool_b
+    # grel:param_b grel:param_true grel:param_false
+    
+    pass
+
+def equal():
+    # valueParameter
+    # valueParameter2
+    # any_false
+    pass
+
+def string_replace():
+    # valueParameter
+    # p_string_find
+    # p_string_replace
+    try:
+        return global_dic["valueParameter"].replace(global_dic["p_string_find"], global_dic["p_string_replace"])
+    except:
+        return global_dic["value"]
+
 def chomp():
     try:
         return global_dic["value"].replace(global_dic["toremove"], "")
