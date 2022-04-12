@@ -2,6 +2,7 @@ import re
 import csv
 import sys
 import os
+from numpy import _FlatIterSelf
 import pandas as pd
 from pathlib import Path
 import requests
@@ -19,26 +20,32 @@ exactMatchDic = dict()
 
 ## For each new function that you define, add an entry as "function_name":"" to the dictionary below 
 functions_pool = {"reverseString":"", "toLower":"", "replaceExactMatch":"", "falcon_UMLS_CUI_function":"", "chomp": "",
-    "concat2": "", "falcon_entity_function": "",}
+    "concat2": "", "falcon_entity_function": "", "controls_if":"", "equal":"",
+    "string_replace":""}
 
 
 ### Non-injective, surjective
 def controls_if():
     # bool_b
     # grel:param_b grel:param_true grel:param_false
-    
-    pass
+    try:
+        if global_dic['bool_b']:
+            return global_dic['any_true']
+        return global_dic['any_false']
+    except:
+        if 'any_false' in global_dic:
+            return global_dic['any_false']
+        return global_dic['any_true']
 
 def equal():
-    # valueParameter
-    # valueParameter2
-    # any_false
-    pass
+    # valueParameter, valueParameter2, any_false
+    if (global_dic["valueParameter"]==global_dic["valueParameter2"]):
+        return True
+    return False
+        
 
 def string_replace():
-    # valueParameter
-    # p_string_find
-    # p_string_replace
+    # valueParameter, p_string_find, p_string_replace
     try:
         return global_dic["valueParameter"].replace(global_dic["p_string_find"], global_dic["p_string_replace"])
     except:
