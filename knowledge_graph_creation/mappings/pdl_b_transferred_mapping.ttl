@@ -1,0 +1,305 @@
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab-fn: <http://example.com/idlab/function/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix coy: <https://schema.coypu.org/#> .
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix : <https://mappings.coypu.org/pdl#> .
+
+<IndustryClassMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT1.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "https://schema.coypu.org/#Industry%3A{industry}";
+        rr:class rdfs:Class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "industry"
+        ]
+    ].
+
+<CompanySizeMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT2.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "https://schema.coypu.org/#CompanySize{size}";
+        rr:class rdfs:Class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "size"
+        ]
+    ].
+
+<GeometryMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT3.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "geometry_company_{id}";;
+        rr:termType rr:BlankNode;
+        rr:class geo:Geometry
+    ];
+    rr:predicateObjectMap [
+        rr:predicate geo:asWKT;
+        rr:objectMap [
+        rr:template  "Point({Longitude} {Latitude})"
+        ]
+    ].
+
+<CountryMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT4.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "https://tests.coypu.org/pdl/country/{country}";
+        rr:class coy:Country
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasGeonamesId;
+        rr:objectMap [
+        rr:parentTriplesMap <pdl#string_replace_output1>;
+        rr:joinCondition [
+            rr:child "CountryGeonamesId";
+            rr:parent "CountryGeonamesId";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "country"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountryCode;
+        rr:objectMap [
+        rml:reference "CountryCode"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+        rr:parentTriplesMap <pdl#string_replace_output1>;
+        rr:joinCondition [
+            rr:child "CountryGeonamesId";
+            rr:parent "CountryGeonamesId";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate wdt:P297;
+        rr:objectMap [
+        rml:reference "CountryCode"
+        ]
+    ].
+
+<NumberOfEmployeesMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT5.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "size_company_{id}";;
+        rr:termType rr:BlankNode;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+        rr:parentTriplesMap <CompanySizeMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ].
+
+<CompanyMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT6.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "https://tests.coypu.org/pdl/company/{id}";
+        rr:class coy:Company
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+        rr:parentTriplesMap <IndustryClassMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "name"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasName;
+        rr:objectMap [
+        rml:reference "name"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasNumberOfEmployees;
+        rr:objectMap [
+        rr:parentTriplesMap <NumberOfEmployeesMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasFounded;
+        rr:objectMap [
+        rml:reference "pdl#controls_if_ub1bL301C28";
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCity;
+        rr:objectMap [
+        rr:template  "https://tests.coypu.org/pdl/location/{locality}"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasId;
+        rr:objectMap [
+        rml:reference "id"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasLocality;
+        rr:objectMap [
+        rr:parentTriplesMap <LocalityMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountry;
+        rr:objectMap [
+        rr:parentTriplesMap <CountryMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate geo:hasGeometry;
+        rr:objectMap [
+        rr:parentTriplesMap <GeometryMap>;
+        rr:joinCondition [
+            rr:child "id";
+            rr:parent "id";
+        ]
+        ]
+    ].
+
+<LocalityMap>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_PROJECT7.csv";
+                rml:referenceFormulation ql:CSV
+                ];
+    rr:subjectMap [
+        rr:template "https://tests.coypu.org/pdl/location/{locality}";
+        rr:class coy:City
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasGeonamesType;
+        rr:objectMap [
+        rml:reference "GeonamesType"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "locality"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasGeonamesId;
+        rr:objectMap [
+        rr:parentTriplesMap <pdl#string_replace_output2>;
+        rr:joinCondition [
+            rr:child "CityGeonamesId";
+            rr:parent "CityGeonamesId";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasRegion;
+        rr:objectMap [
+        rml:reference "pdl#controls_if_ub1bL191C28";
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountry;
+        rr:objectMap [
+        rr:template  "https://tests.coypu.org/pdl/country/{country}"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate coy:hasPopulation;
+        rr:objectMap [
+        rml:reference "pdl#string_replace_ub1bL162C30";
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+        rr:parentTriplesMap <pdl#string_replace_output2>;
+        rr:joinCondition [
+            rr:child "CityGeonamesId";
+            rr:parent "CityGeonamesId";
+            ];
+        ];
+    ].
+
+<pdl#string_replace_output1>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_OUTPUT1.csv";
+                rml:referenceFormulation ql:CSV
+            ];
+    rr:subjectMap [
+        rml:reference "pdl#string_replace_output1";
+        rr:termType rr:IRI
+    ].
+
+<pdl#string_replace_output2>
+    a rr:TriplesMap;
+    rml:logicalSource [ rml:source "/data/translated/pdl_b_OUTPUT2.csv";
+                rml:referenceFormulation ql:CSV
+            ];
+    rr:subjectMap [
+        rml:reference "pdl#string_replace_output2";
+        rr:termType rr:IRI
+    ].
+

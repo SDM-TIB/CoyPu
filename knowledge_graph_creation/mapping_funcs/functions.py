@@ -2,7 +2,6 @@ import re
 import csv
 import sys
 import os
-from numpy import _FlatIterSelf
 import pandas as pd
 from pathlib import Path
 import requests
@@ -47,9 +46,9 @@ def equal():
 def string_replace():
     # valueParameter, p_string_find, p_string_replace
     try:
-        return global_dic["valueParameter"].replace(global_dic["p_string_find"], global_dic["p_string_replace"])
+        return str(global_dic["valueParameter"]).replace(global_dic["p_string_find"], global_dic["p_string_replace"])
     except:
-        return global_dic["value"]
+        return str(global_dic["valueParameter"])
 
 def chomp():
     try:
@@ -81,6 +80,7 @@ def falcon_entity_function():
 
     return ""
 
+### Non-injective, surjective 
 def toLower(): 
     return global_dic["value"].lower()
 
@@ -90,8 +90,7 @@ def dictionaryCreation():
     with open(str(directory)+"/Sources/label_cui_dictionary.csv",'r') as data:
         for row in csv.DictReader(data):
             exactMatchDic.update({row['SampleOriginLabel']:row['CUI']}) 
-
-# dictionaryCreation()
+dictionaryCreation()
 
 def replaceExactMatch():    
     value = global_dic["value"]                   
@@ -134,7 +133,10 @@ def falcon_UMLS_CUI_function():
 ################################################################################################
 
 def execute_function(row,header,dic):
-    func = dic["function"].split("/")[len(dic["function"].split("/"))-1]
+    if "#" in dic["function"]:
+        func = dic["function"].split("#")[1]
+    else:
+        func = dic["function"].split("/")[len(dic["function"].split("/"))-1]
     if func in functions_pool:
         global global_dic
         global_dic = execution_dic(row,header,dic)
@@ -150,8 +152,8 @@ def execution_dic(row,header,dic):
         if "constant" not in inputs: 
             if isinstance(row,dict):
                 output[inputs[2]] = row[inputs[0]]
-            elif isinstance(global_row,list):
-                output[inputs[2]] = row[header.index(global_dic["func_par"][inputs[2]])]
+            else:
+                output[inputs[2]] = row[header.index(inputs[0])]
         else:
             output[inputs[2]] = inputs[0]
     return output

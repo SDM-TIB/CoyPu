@@ -13,7 +13,7 @@ services:
       - coypu_net
 
   semantic-enrichment:
-    image: eiglesias34/sdmrdffizer:4.0.3 # Update to latest version
+    image: eiglesias34/sdmrdffizer:4.3 # Update to latest version
     hostname: semantic-enrichment
     container_name: semantic_enrichment
     domainname: coypu
@@ -27,7 +27,7 @@ services:
       - coypu_net
 
   dragoman:
-    image: sdmtib/dragoman:1.6 # Update to latest version
+    image: sdmtib/dragoman:1.8.2 # Update to latest version
     hostname: dragoman
     container_name: dragoman
     domainname: coypu

@@ -4,3 +4,5 @@
 data/
 *.xlsx
 generated_rdf_graphs/
+*.ini
+graphdb-home/repositories/

@@ -17,29 +17,22 @@
 @prefix : <https://mappings.coypu.org/pdl#> .
 
 :Source
-rml:logicalSource [ 
-            rml:source "/data/minix.csv";
-			rml:referenceFormulation ql:CSV 
-						].
+      rml:source "/data/minix_updated.csv";
+			rml:referenceFormulation ql:CSV.
 
 :CompanySizeMap
   a rr:TriplesMap ;
-  rml:logicalSource :Source ;
+  rml:logicalSource :Source;
 
   rr:subjectMap [
     rr:template "https://schema.coypu.org/#CompanySize{size}" ;
     rr:class rdfs:Class ;
   ];
 
-  rr:predicateObjectMap
-    [
-      rr:predicate rdfs:subClassOf ;
-      rr:object coy:CompanySizeGroup ;
-    ]
-    , [
+  rr:predicateObjectMap[
       rr:predicate rdfs:label ;
       rr:objectMap [ rml:reference "size" ] ;
-    ];.
+  ].
 
 :NumberOfEmployeesMap
   a rr:TriplesMap ;
@@ -118,11 +111,10 @@ _:_country_geonames_id_obj_map
   rr:termType rr:IRI ;
   fnml:functionValue [
     rml:logicalSource :Source;
-
     rr:predicateObjectMap _:_fn_str_replace
     , [
       rr:predicate :valueParameter ;
-      rr:objectMap [ rr:template "https://sws.geonames.org/{CountryGeonamesId}/" ] ;
+      rr:objectMap [ rml:reference "CountryGeonamesId"] ;
     ]
     , [
       rr:predicate :p_string_find ;
@@ -144,12 +136,7 @@ _:_country_geonames_id_obj_map
     rr:class rdfs:Class ;
   ] ;
 
-  rr:predicateObjectMap
-    [
-      rr:predicate rdfs:subClassOf ;
-      rr:object coy:Industry ;
-    ]
-    , [
+  rr:predicateObjectMap [
       rr:predicate rdfs:label ;
       rr:objectMap [ rml:reference "industry" ] ;
     ]
@@ -174,6 +161,7 @@ _:_country_geonames_id_obj_map
       rr:objectMap [ 
 
           fnml:functionValue [
+        rml:logicalSource :Source;
   	    rr:predicateObjectMap _:_fn_str_replace
   	    , [
   	      rr:predicate :valueParameter ;
@@ -202,12 +190,14 @@ _:_country_geonames_id_obj_map
       rr:predicate coy:hasRegion ;
       rr:objectMap [
         fnml:functionValue [
+    rml:logicalSource :Source;
 	  rr:predicateObjectMap _:_fn_if
 	  , [
 	    rr:predicate :bool_b ;
 	    rr:objectMap [ 
 
 	        fnml:functionValue [
+      rml:logicalSource :Source;
 		  rr:predicateObjectMap _:_fn_equal
 		  , [
 		    rr:predicate :valueParameter ;
@@ -246,10 +236,11 @@ _:_country_geonames_id_obj_map
 _:_city_geonames_id_obj_map
   rr:termType rr:IRI ;
   fnml:functionValue [
+    rml:logicalSource :Source;
     rr:predicateObjectMap _:_fn_str_replace
     , [
       rr:predicate :valueParameter ;
-      rr:objectMap [ rr:template "https://sws.geonames.org/{CityGeonamesId}/" ] ;
+      rr:objectMap [ rml:reference "CityGeonamesId" ] ;
     ]
     , [
       rr:predicate :p_string_find ;
@@ -295,9 +286,9 @@ _:_city_geonames_id_obj_map
       rr:objectMap [ rml:reference "id" ] ;
     ]
     , [
-      rr:predicate coy:hasNumberOfEmployees ;
+      rr:predicate coy:hasNumberOfEmployees;
       rr:objectMap [
-        rr:parentTriplesMap :NumberOfEmployeesMap ;
+        rr:parentTriplesMap :NumberOfEmployeesMap;
 	rr:joinCondition [
 	  rr:child "id" ;
 	  rr:parent "id" ;
@@ -309,12 +300,14 @@ _:_city_geonames_id_obj_map
       rr:objectMap [
         rr:datatype xsd:gYear ;
         fnml:functionValue [
+    rml:logicalSource :Source;
 	  rr:predicateObjectMap _:_fn_if
 	  , [
 	    rr:predicate :bool_b ;
 	    rr:objectMap [ 
 
 	        fnml:functionValue [
+      rml:logicalSource :Source;
 		  rr:predicateObjectMap _:_fn_equal
 		  , [
 		    rr:predicate :valueParameter ;
@@ -333,7 +326,8 @@ _:_city_geonames_id_obj_map
 	    rr:predicate :any_false ;
 	    rr:objectMap [ 
 
-	        fnml:functionValue [
+	    fnml:functionValue [
+      rml:logicalSource :Source;
 		  rr:predicateObjectMap _:_fn_str_replace
 		  , [
 		    rr:predicate :valueParameter ;
@@ -406,3 +400,4 @@ _:_fn_str_replace
   rr:predicate fno:executes ;
   rr:objectMap [ rr:constant :string_replace ] ;
 .
+
