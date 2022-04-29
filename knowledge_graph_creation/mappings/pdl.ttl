@@ -29,10 +29,15 @@
     rr:class rdfs:Class ;
   ];
 
-  rr:predicateObjectMap[
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:subClassOf ;
+      rr:object coy:CompanySizeGroup ;
+    ]
+    , [
       rr:predicate rdfs:label ;
       rr:objectMap [ rml:reference "size" ] ;
-  ].
+    ].
 
 :NumberOfEmployeesMap
   a rr:TriplesMap ;
@@ -69,8 +74,9 @@
     [
       rr:predicate geo:asWKT ;
       rr:objectMap [
-        rr:template "Point({Longitude} {Latitude})" ;
-	    rr:datatype geo:wktLiteral ;
+      rr:template "Point({Longitude} {Latitude})" ;
+      rr:termType rr:Literal ;
+	    rr:datatype geo:wktLiteral
 	    ] ;
     ];
 .
@@ -110,22 +116,33 @@
 _:_country_geonames_id_obj_map
   rr:termType rr:IRI ;
   fnml:functionValue [
-    rml:logicalSource :Source;
-    rr:predicateObjectMap _:_fn_str_replace
+  rml:logicalSource :Source;
+  rr:predicateObjectMap _:_fn_concat2
+	  , [
+	    rr:predicate  :value1;
+	    rr:objectMap [ rr:constant "https://sws.geonames.org/"]
+    ]
     , [
+	    rr:predicate  :value2;
+	    rr:objectMap [
+      fnml:functionValue [
+      rml:logicalSource :Source;
+      rr:predicateObjectMap _:_fn_str_replace
+      , [
       rr:predicate :valueParameter ;
       rr:objectMap [ rml:reference "CountryGeonamesId"] ;
-    ]
+        ]
     , [
       rr:predicate :p_string_find ;
       rr:objectMap [ rr:constant ".0" ] ;
     ]
     , [
       rr:predicate :p_string_replace ;
-      rr:objectMap [ rr:constant "" ] ;
+      rr:objectMap [ rr:constant "/" ] ;
     ]
-  ] ;
-.
+  ];
+  ];
+  ];].
 
 :IndustryClassMap
   a rr:TriplesMap ;
@@ -136,7 +153,12 @@ _:_country_geonames_id_obj_map
     rr:class rdfs:Class ;
   ] ;
 
-  rr:predicateObjectMap [
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:subClassOf ;
+      rr:object coy:Industry ;
+    ]
+    , [
       rr:predicate rdfs:label ;
       rr:objectMap [ rml:reference "industry" ] ;
     ]
@@ -236,6 +258,16 @@ _:_country_geonames_id_obj_map
 _:_city_geonames_id_obj_map
   rr:termType rr:IRI ;
   fnml:functionValue [
+  rml:logicalSource :Source;
+  rr:predicateObjectMap _:_fn_concat2
+	  , [
+	    rr:predicate  :value1;
+	    rr:objectMap [ rr:constant "https://sws.geonames.org/"]
+    ]
+    , [
+	    rr:predicate  :value2;
+	    rr:objectMap [
+  fnml:functionValue [
     rml:logicalSource :Source;
     rr:predicateObjectMap _:_fn_str_replace
     , [
@@ -248,10 +280,12 @@ _:_city_geonames_id_obj_map
     ]
     , [
       rr:predicate :p_string_replace ;
-      rr:objectMap [ rr:constant "" ] ;
+      rr:objectMap [ rr:constant "/" ] ;
     ]
-  ] ;
-.
+   ];
+  ];
+  ];
+  ].
 
 :CompanyMap
   a rr:TriplesMap ;
@@ -385,6 +419,11 @@ _:_city_geonames_id_obj_map
       ] ;
     ]
 .
+
+
+_:_fn_concat2
+  rr:predicate fno:executes ;
+  rr:objectMap [ rr:constant :concat2 ].
 
 _:_fn_if
   rr:predicate fno:executes ;

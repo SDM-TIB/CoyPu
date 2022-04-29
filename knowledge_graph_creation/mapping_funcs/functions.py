@@ -55,6 +55,18 @@ def chomp():
         return global_dic["value"].replace(global_dic["toremove"], "")
     except:
         return global_dic["value"]
+    
+def concat2():
+    value1 = global_dic["value1"]
+    value2 = global_dic["value2"]
+    try :
+        if bool(value1) and bool(value2):
+            result = str(str(value1) + str(value2))
+        else:
+            result = ""
+        return result
+    except:
+        return ""
 
 
 headers = {"content-type": "application/json", "Accept-Charset": "UTF-8"}

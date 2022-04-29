@@ -27,7 +27,7 @@ services:
       - coypu_net
 
   dragoman:
-    image: sdmtib/dragoman:1.8.2 # Update to latest version
+    image: sdmtib/dragoman:1.8.3 # Update to latest version
     hostname: dragoman
     container_name: dragoman
     domainname: coypu

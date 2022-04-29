@@ -1,0 +1,26 @@
+Test Query
+
+# Sort and unq
+# docker exec -it coypu_endpoint bash
+# isql-v
+
+# SQL QUERY
+SPARQL SELECT * FROM <https://l3s.coypu.org> WHERE {?s ?p ?o.};
+
+INSERT 
+{GRAPH <https://l3s.coypu.org> 
+{  
+ <https://tests.coypu.org/pdl/company/example3> <http://www.opengis.net/ont/geosparql#hasGeometry> _:node-b-c.
+ _:node-b-c <http://www.opengis.net/ont/geosparql#asWKT> "Point".
+}}
+
+INSERT {GRAPH <https://l3s.coypu.org> {_:node18errd605x19406 <http://www.w3.org/2006/vcard/ns#postalCode> "67401" .}}
+
+
+Permission
+grant execute on "DB.DBA.EXEC_AS" to "SPARQL";
+grant execute on "DB.DBA.SPARQL_INSERT_CTOR_ACC" to "SPARQL";
+grant execute on "DB.DBA.SPARQL_INS_OR_DEL_OR_MODIFY_CTOR_FIN" to "SPARQL";
+grant execute on "DB.DBA.L_O_LOOK" to "SPQRQL";
+grant execute on "DB.DBA.SPARQL_INSERT_DICT_CONTENT" to "SPARQL";
+
