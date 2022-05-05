@@ -1,0 +1,19 @@
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix coy: <https://schema.coypu.org/#> .
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix : <https://mappings.coypu.org/lie#> .
+
+# legalName, Registered At, Registered As, Jurisdiction Of Formation, General Category, Entity Legal Form, Entity Status, Entity created at
+# Addresses (legal, Headquarters)
+# Registration details (Registration Date, Last Update, Status, Next Renewal, LEI Issuer, Corroboration Level, Data Validated At, Data Validated As )
