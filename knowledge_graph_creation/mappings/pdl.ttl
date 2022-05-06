@@ -11,13 +11,13 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix coy: <https://schema.coypu.org/#> .
+@prefix coy: <https://schema.coypu.org/global#> .
 @prefix gn: <https://www.geonames.org/ontology#> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix : <https://mappings.coypu.org/pdl#> .
 
 :Source
-      rml:source "/data/minix_updated.csv";
+      rml:source "/data/PeopleDataLabsCompanies.csv";
 			rml:referenceFormulation ql:CSV.
 
 :CompanySizeMap

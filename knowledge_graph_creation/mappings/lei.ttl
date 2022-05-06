@@ -9,11 +9,102 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix coy: <https://schema.coypu.org/#> .
+@prefix coy: <https://schema.coypu.org/global#> .
 @prefix gn: <https://www.geonames.org/ontology#> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix : <https://mappings.coypu.org/lie#> .
+@prefix gleif-L1: <https://www.gleif.org/ontology/L1/> .
+@prefix gleif-L2: <https://www.gleif.org/ontology/L2/> .
+@prefix gleif-base: <https://www.gleif.org/ontology/Base/> .
+@prefix gleif-elf: <https://www.gleif.org/ontology/EntityLegalForm/> .
+@prefix gleif-ra: <https://www.gleif.org/ontology/RegistrationAuthority/> .
+@prefix gleif-BIC-data: <https://rdf.gleif.org/BIC/> .
+@prefix gleif-repex: <https://www.gleif.org/ontology/ReportingException/> .
+@prefix gleif-repex-data: <https://rdf.gleif.org/ReportingException/> .
 
-# legalName, Registered At, Registered As, Jurisdiction Of Formation, General Category, Entity Legal Form, Entity Status, Entity created at
+# LEI,legalName, Registered At, Registered As, Jurisdiction Of Formation, General Category, Entity Legal Form, Entity Status, Entity created at
 # Addresses (legal, Headquarters)
 # Registration details (Registration Date, Last Update, Status, Next Renewal, LEI Issuer, Corroboration Level, Data Validated At, Data Validated As )
+
+:LegalEntityIdentifierMap a rr:TriplesMap;
+    rml:logicalSource [ 
+                       rml:source "/data/lei2_sample.csv";
+						rml:referenceFormulation ql:CSV 
+					];
+    
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/lei/{LEI}"; # need to be changed {iso}_{year}
+        rr:class gleif-L1:LegalEntity;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasLegalName;
+        rr:objectMap [ rr:template "{Entity.LegalName}@{Entity.LegalName.xmllang}"];
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate coy:hasEntityCategory;
+        rr:objectMap [rml:reference "Entity.EntityCategory"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasEntityStatus;
+        rr:objectMap [rml:reference "Entity.EntityStatus"];
+    ];
+    
+      rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasCreationDate;
+        rr:objectMap [rml:reference "Entity.EntityCreationDate"; rr:datatype xsd:dataTime];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasLegalForm;
+        rr:objectMap :LegalFormMAP;
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate coy:hasLegalJurisdiction;
+        rr:objectMap :SubRegionMAP;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasRegistration;
+        rr:objectMap :RegistrationMAP;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasLegalAddress;
+        rr:objectMap :LegalAddressMap;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasHeadquartersAddress;
+        rr:objectMap :HeadquartersAddressMap;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasEntityRegistration;
+        rr:objectMap :EntityRegistrationMAP;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasEntityValidation;
+        rr:objectMap :EntityValidationMAP;
+    ].
+
+
+:LegalAddressMap a rr:TriplesMap;
+    rml:logicalSource [ 
+                       rml:source "/data/lei2_sample.csv";
+						rml:referenceFormulation ql:CSV 
+					];
+    
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/lei/{LEI}-LA"; # need to be changed {iso}_{year}
+        rr:class gleif-base:PhysicalAddress;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gleif-L1:hasLegalName;
+        rr:objectMap [ rr:template "{Entity.LegalName}@{Entity.LegalName.xmllang}"];
+    ];
