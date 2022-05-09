@@ -14,7 +14,8 @@ def remove_quotes_csv(file, updated_file, header=False, index=False):
 def get_sample_data(file, updated_file, index=False):
     chunks = pd.read_csv(file, encoding='utf-8', chunksize=100000, low_memory=False)
     for chunk in chunks:
-        df = chunk.sample(200, random_state=1).dropna(axis=1, how='all')
+        df = chunk.sample(200, random_state=1)
+        # df = df.dropna(axis=1, how='all')
         break
     df.to_csv(updated_file, index=index)
     
