@@ -27,7 +27,7 @@
 
 :LegalEntityIdentifierMap a rr:TriplesMap;
     rml:logicalSource [ 
-                       rml:source "/data/lei2_sample.csv";
+                       rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
 						rml:referenceFormulation ql:CSV 
 					];
     
@@ -38,7 +38,9 @@
 
     rr:predicateObjectMap [
         rr:predicate gleif-L1:hasLegalName;
-        rr:objectMap [ rr:template "{Entity.LegalName}@{Entity.LegalName.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalName"; rml:languageMap [
+         rml:reference "Entity.LegalName.xmllang"]
+         ];
     ];
     
     rr:predicateObjectMap [
@@ -140,57 +142,57 @@
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressNumber;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.AddressNumber}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.AddressNumber"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressNumberWithinBuilding;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.AddressNumberWithinBuilding}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.AddressNumberWithinBuilding"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasFirstAddressLine;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.FirstAddressLine}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.FirstAddressLine"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine1;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.AdditionalAddressLine.1}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.AdditionalAddressLine.1"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine2;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.AdditionalAddressLine.2}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.AdditionalAddressLine.2"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine3;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.AdditionalAddressLine.3}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.AdditionalAddressLine.3"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasMailRouting;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.MailRouting}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.MailRouting"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasCity;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.City}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.City"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate gleif-base:hasRegion;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.Region}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.Region"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasCountry;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.Country}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.Country"];
     ];
 
       rr:predicateObjectMap [
         rr:predicate gleif-base:hasPostalCode;
-        rr:objectMap [ rr:template "{Entity.LegalAddress.PostalCode}@{Entity.LegalAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.LegalAddress.PostalCode"];
     ].
 
 :HeadquartersAddressMap a rr:TriplesMap;
@@ -206,57 +208,57 @@
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressNumber;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.AddressNumber}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.AddressNumber"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressNumberWithinBuilding;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.AddressNumberWithinBuilding}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.AddressNumberWithinBuilding"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasFirstAddressLine;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.FirstAddressLine}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.FirstAddressLine"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine1;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.AdditionalAddressLine.1}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.AdditionalAddressLine.1"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine2;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.AdditionalAddressLine.2}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.AdditionalAddressLine.2"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasAddressLine3;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.AdditionalAddressLine.3}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.AdditionalAddressLine.3"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasMailRouting;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.MailRouting}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.MailRouting"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasCity;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.City}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.City"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate gleif-base:hasRegion;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.Region}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.Region"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasCountry;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.Country}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.Country"];
     ];
 
       rr:predicateObjectMap [
         rr:predicate gleif-base:hasPostalCode;
-        rr:objectMap [ rr:template "{Entity.HeadquartersAddress.PostalCode}@{Entity.HeadquartersAddress.xmllang}"];
+        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.PostalCode"];
     ].
 
     
@@ -273,12 +275,12 @@
 
     rr:predicateObjectMap [
         rr:predicate coy:hasRegistrationAuthorityID;
-        rr:objectMap [ rr:template "{Entity.RegistrationAuthority.RegistrationAuthorityID}"];
+        rr:objectMap [ rml:reference "Entity.RegistrationAuthority.RegistrationAuthorityID"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate coy:hasRegistrationAuthorityEntityID;
-        rr:objectMap [ rr:template "{Entity.RegistrationAuthority.RegistrationAuthorityEntityID}"];
+        rr:objectMap [ rml:reference "Entity.RegistrationAuthority.RegistrationAuthorityEntityID"];
     ].
 
 :EntityValidationMAP a rr:TriplesMap;
@@ -294,10 +296,12 @@
 
     rr:predicateObjectMap [
         rr:predicate coy:ValidationAuthorityID;
-        rr:objectMap [ rr:template "{Registration.ValidationAuthority.ValidationAuthorityID}"];
+        rr:objectMap [ rml:reference "Registration.ValidationAuthority.ValidationAuthorityID"];
     ];
 
      rr:predicateObjectMap [
         rr:predicate coy:ValidationAuthorityEntityID;
-        rr:objectMap [ rr:template "{Registration.ValidationAuthority.ValidationAuthorityEntityID}"];
+        rr:objectMap [ rml:reference "Registration.ValidationAuthority.ValidationAuthorityEntityID"];
     ].
+
+    
