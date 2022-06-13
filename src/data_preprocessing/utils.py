@@ -19,11 +19,5 @@ def get_sample_data(file, updated_file, index=False):
         break
     df.to_csv(updated_file, index=index)
     
-    
 
-# remove_quotes_csv('./data/minix.csv', './data/minix_updated.csv')
-# print (pd.read_csv('./data/minix_updated.csv').columns)
-get_sample_data('data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv', 'data/lei2_sample.csv')
-get_sample_data('data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv', 'data/lie_rr_sample.csv')
-get_sample_data('data/20220502-0800-gleif-goldencopy-repex-golden-copy.csv', 'data/lie_rr_ex_sample.csv')
   

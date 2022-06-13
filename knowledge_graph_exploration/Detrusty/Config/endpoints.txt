@@ -1,2 +1,2 @@
-https://labs.tib.eu/sdm/coypu-endpoint/sparql
+https://labs.tib.eu/sdm/coypu-endpoint/sparql/
 

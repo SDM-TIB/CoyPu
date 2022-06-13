@@ -86,6 +86,7 @@ services:
     domainname: coypu
     volumes:
       - ./knowledge_graph_exploration/Detrusty/Config/:/DeTrusty/Config/
+      - ./knowledge_graph_exploration/Detrusty/Query/:/DeTrusty/Query/
     ports:
       - "5002:5000"
     networks:

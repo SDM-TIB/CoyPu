@@ -19,10 +19,9 @@
 @prefix gleif-ra: <https://www.gleif.org/ontology/RegistrationAuthority/> .
 @prefix gleif-repex: <https://www.gleif.org/ontology/ReportingException/> .
 
-
 :Source
       #rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
-      rml:source "/data/lei2_sample.csv";
+      rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
 	  rml:referenceFormulation ql:CSV.
 
 :LegalEntityIdentifierMap a rr:TriplesMap;
@@ -291,14 +290,16 @@
     ].
 
 :Source1
-      rml:source "/data/lie_rr_sample.csv";
+      rml:source "/data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv";
+      # rml:source "/data/lie_rr_sample.csv";
 	  rml:referenceFormulation ql:CSV.
 
 :RelationshipMap a rr:TriplesMap;
     rml:logicalSource :Source1;
     
     rr:subjectMap [
-        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}"; # need to be changed {iso}_{year}
+        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}";
+        rr:class coy:LegalEntity;
     ];
 
     rr:predicateObjectMap [
