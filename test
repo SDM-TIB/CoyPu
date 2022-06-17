@@ -59,25 +59,3 @@ response = requests.post('http://dm.coypu.org:5000/api/action/resource_create',
 
 ssh ldm_coypu -L 5000:localhost:5000
 sed -n '20,40p;41q' file_name
-
-
-default"&rows=1&wt=json} hits=1 status=0 QTime=1
-datapusher | Job "push_to_datastore (trigger: RunTriggerNow, run = True, next run at: None)" raised an exception
-datapusher | Traceback (most recent call last):
-datapusher |   File "/usr/local/lib/python2.7/site-packages/apscheduler/scheduler.py", line 512, in _run_job
-datapusher |     retval = job.func(*job.args, **job.kwargs)
-datapusher |   File "/usr/src/app/datapusher/jobs.py", line 222, in push_to_datastore
-datapusher |     resource = get_resource(resource_id, ckan_url, api_key)
-datapusher |   File "/usr/src/app/datapusher/jobs.py", line 178, in get_resource
-datapusher |     'Authorization': api_key}
-datapusher |   File "/usr/local/lib/python2.7/site-packages/requests/api.py", line 94, in post
-datapusher |     return request('post', url, data=data, json=json, **kwargs)
-datapusher |   File "/usr/local/lib/python2.7/site-packages/requests/api.py", line 49, in request
-datapusher |     return session.request(method=method, url=url, **kwargs)
-datapusher |   File "/usr/local/lib/python2.7/site-packages/requests/sessions.py", line 457, in request
-datapusher |     resp = self.send(prep, **send_kwargs)
-datapusher |   File "/usr/local/lib/python2.7/site-packages/requests/sessions.py", line 569, in send
-datapusher |     r = adapter.send(request, **kwargs)
-datapusher |   File "/usr/local/lib/python2.7/site-packages/requests/adapters.py", line 407, in send
-datapusher |     raise ConnectionError(err, request=request)
-datapusher | ConnectionError: ('Connection aborted.', error(99, 'Cannot assign requested address'))
