@@ -1,4 +1,4 @@
-@prefix : <https://mappings.coypu.org/lie#> .
+@prefix : <https://mappings.coypu.org/lei#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
@@ -21,7 +21,8 @@
 
 :Source
       #rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
-      rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
+      # rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
+      rml:source "/data/lei2_sample.csv";
 	  rml:referenceFormulation ql:CSV.
 
 :LegalEntityIdentifierMap a rr:TriplesMap;
@@ -290,9 +291,9 @@
     ].
 
 :Source1
-      rml:source "/data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv";
-      # rml:source "/data/lie_rr_sample.csv";
-	  rml:referenceFormulation ql:CSV.
+      #rml:source "/data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv";
+      rml:source "/data/lei_rr_sample.csv";
+	  rml:referenceFormulation ql:CSV .
 
 :RelationshipMap a rr:TriplesMap;
     rml:logicalSource :Source1;

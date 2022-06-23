@@ -80,7 +80,7 @@ services:
       - coypu_net
 
   detrusty:
-    image: prohde/detrusty:0.2.0 # Update to latest version
+    image: sdmtib/detrusty:latest # Update to latest version
     hostname: detrusty
     container_name: detrusty
     domainname: coypu
