@@ -40,6 +40,13 @@
          ];
     ];
     
+	 rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [ rml:reference "Entity.LegalName"; rml:languageMap [
+         rml:reference "Entity.LegalName.xmllang"];
+         ];
+    ];
+	
     rr:predicateObjectMap [
         rr:predicate coy:hasEntityCategory;
         rr:objectMap [rml:reference "Entity.EntityCategory"];
