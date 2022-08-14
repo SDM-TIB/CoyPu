@@ -1,0 +1,3 @@
+https://labs.tib.eu/sdm/coypu-endpoint/sparql/
+
+

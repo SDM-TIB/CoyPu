@@ -1,0 +1,221 @@
+@prefix :      <https://schema.coypu.org/> .
+@prefix coy: <https://schema.coypu.org/global#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+
+
+<CountryData2021_1> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source <#DB_source>; 
+        rr:sqlVersion rr:SQL2008;       
+        rr:tableName "CountryData2021"
+    ];
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/country/{ISO3}";
+        rr:class coy:Country;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasIsoCode; # Note: Three letters
+        rr:objectMap [ rml:reference "ISO3"; rr:language "en"]; # isoCode Language
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gn:countryCode; # Note: Three letters
+        rr:objectMap [ rml:reference "ISO"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate gn:geonamesID;
+        rr:objectMap [ rml:reference "geonameid"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCurrency;
+        rr:objectMap [ rml:reference "CurrencyName"; rr:language "en"];
+    ];
+
+      rr:predicateObjectMap [
+        rr:predicate coy:HasCurrencyCode;
+        rr:objectMap [ rml:reference "CurrencyCode"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasIsdCode;
+        rr:objectMap [ rml:reference "Phone"; rr:language "en"];
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate coy:isPartOfContinent;
+        rr:objectMap [ rml:reference "Continent"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasAreaSqKm;
+        rr:objectMap [ rml:reference "Area(in sq km)"; rr:datatype xsd:positiveInteger];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountryStatistics;
+        rr:objectMap [ rr:template "https://data.coypu.org/countryStatistics/{ISO3}_2021"];
+    ].
+
+
+<CountryData2021_2> a rr:TriplesMap;
+    rml:logicalSource  [
+        rml:source <#DB_source>; 
+        rr:sqlVersion rr:SQL2008;
+        rml:query """ SELECT ISO3, Population FROM CountryData2021 """ ;      
+        # rr:tableName "CountryData2021" 
+        ];
+    
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/countryStatistics/{ISO3}_2021";
+        rr:class coy:CountryStatistics;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasPopulation;
+        rr:objectMap [ rml:reference "Population"; rr:datatype xsd:long];
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasGYear;
+        rr:objectMap [ rr:constant "2021"; rr:datatype xsd:gYear];
+    ].
+
+
+<CountriesResilienceSample2021_2> a rr:TriplesMap;
+    rml:logicalSource [ 
+                       rml:source "/data/CountriesResilienceSample2021.csv";
+						rml:referenceFormulation ql:CSV 
+					];
+    
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/countryStatistics/{iso}_2021"; # need to be changed {iso}_{year}
+        rr:class coy:CountryStatistics;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasRiskLevel;
+        rr:objectMap [ rml:reference "Rang"; rr:datatype xsd:positiveInteger];
+    ];
+    
+     rr:predicateObjectMap [
+        rr:predicate coy:hasGYear;
+        rr:objectMap [ rr:constant "2021"; rr:datatype xsd:gYear];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasExposure;
+        rr:objectMap <chomp_func>;
+    ].
+
+<CountriesResilienceSample2021_1> a rr:TriplesMap;
+    rml:logicalSource [ 
+                        rml:source "/data/CountriesResilienceSample2021.csv";
+						rml:referenceFormulation ql:CSV 
+						];
+    
+    rr:subjectMap [
+        rr:template "https://data.coypu.org/country/{iso}";
+        rr:class coy:Country;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasIsoCode;
+        rr:objectMap [ rml:reference "iso"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [ rml:reference "country_name_en"; rr:language "en"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:alternateName;
+        rr:objectMap [ rml:reference "country_name_de"; rr:language "de"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasWikiUri;
+        rr:objectMap <falcon_entity_func>;
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountryStatistics;
+        rr:objectMap [rr:template "https://data.coypu.org/countryStatistics/{iso}_2021"];
+       # rr:objectMap  <RefObjectMap1>
+    ].
+
+# <RefObjectMap1>
+#     a rr:RefObjectMap;
+#     rr:parentTriplesMap <#CountriesResilienceSample2021_2> .
+
+##########################Functions####################################
+
+<falcon_entity_func>
+    fnml:functionValue [
+        rml:logicalSource [ 
+            rml:source "/data/CountriesResilienceSample2021.csv";
+						rml:referenceFormulation ql:CSV 
+						];
+        rr:predicateObjectMap [
+            rr:predicate fno:executes;
+            rr:objectMap [ 
+                rr:constant coy:falcon_entity_function 
+            ]
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate coy:value;
+            rr:objectMap [ 
+                rml:reference "country_name_en" 
+            ]
+        ];
+    ].
+
+<chomp_func>
+    fnml:functionValue [
+        rml:logicalSource [ 
+            rml:source "/data/CountriesResilienceSample2021.csv";
+						rml:referenceFormulation ql:CSV ];
+        rr:predicateObjectMap [
+            rr:predicate fno:executes;
+            rr:objectMap [ 
+                rr:constant coy:chomp 
+            ]
+        ];
+        rr:predicateObjectMap [
+            rr:predicate coy:value;
+            rr:objectMap [ 
+                rml:reference "Exposure";
+                rdf:datatype xsd:decimal
+            ] 
+        ];  
+
+        rr:predicateObjectMap [
+            rr:predicate coy:toremove;
+            rr:objectMap [ 
+                rr:constant "%" 
+            ] 
+        ];  
+    ].
+
+
+<#DB_source> a d2rq:Database;
+  d2rq:jdbcDSN  "jdbc:mysql"; # "CONNECTIONDSN"; # the "jbdc:mysql:// part is ignored
+  d2rq:jdbcDriver "com.mysql.jdbc.Driver"; # "com.mysql.cj.jdbc.Driver"; # this is ignored
+  d2rq:username "avyas";
+  d2rq:password "" .

@@ -1,0 +1,61 @@
+Test Query
+
+# Sort and unq
+# docker exec -it coypu_endpoint bash
+# isql-v
+# SELECT * FROM db.dba.load_list;
+
+# SQL QUERY
+SPARQL SELECT * FROM <https://l3s.coypu.org> WHERE {?s ?p ?o.};
+
+
+Select Distinct ?g
+WHERE {
+     Graph ?g
+    {
+       ?s ?p ?o.
+    }
+}LIMIT 100
+
+INSERT 
+{GRAPH <https://l3s.coypu.org> 
+{  
+ <https://tests.coypu.org/pdl/company/example3> <http://www.opengis.net/ont/geosparql#hasGeometry> _:node-b-c.
+ _:node-b-c <http://www.opengis.net/ont/geosparql#asWKT> "Point".
+}}
+
+INSERT {GRAPH <https://l3s.coypu.org> {_:node18errd605x19406 <http://www.w3.org/2006/vcard/ns#postalCode> "67401" .}}
+
+Select distinct *
+where
+{
+Graph <http://iasis-project.eu> 
+{
+?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?o.
+?o <http://www.opengis.net/ont/geosparql#asWKT> ?o1.
+Filter(isblank(?o))
+}
+}
+
+
+Permission
+grant execute on "DB.DBA.EXEC_AS" to "SPARQL";
+grant execute on "DB.DBA.SPARQL_INSERT_CTOR_ACC" to "SPARQL";
+grant execute on "DB.DBA.SPARQL_INS_OR_DEL_OR_MODIFY_CTOR_FIN" to "SPARQL";
+grant execute on "DB.DBA.L_O_LOOK" to "SPARQL";
+grant execute on "DB.DBA.SPARQL_INSERT_DICT_CONTENT" to "SPARQL";
+
+
+sudo chsh -s /bin/bash <username>
+
+import requests
+import os
+response = requests.post('http://dm.coypu.org:5000/api/action/resource_create',
+              data={"package_id":"test10", "name":"test22"},
+              headers={"X-CKAN-API-Key": "65d55933-84a8-4739-b5a8-f3d718fd8cca"},
+              files=[('upload', open('/home/tibvyasa/minix_updated.csv'))])
+
+
+
+ssh ldm_coypu -L 5000:localhost:5000
+sed -n '20,40p;41q' file_name

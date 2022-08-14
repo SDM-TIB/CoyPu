@@ -1,0 +1,10 @@
+.vscode
+*.nt
+*.csv
+data/
+*.xlsx
+generated_rdf_graphs/
+*.ini
+*.pyc
+graphdb-home/repositories/
+credentials.py

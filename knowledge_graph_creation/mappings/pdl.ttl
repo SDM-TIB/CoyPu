@@ -1,0 +1,442 @@
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab-fn: <http://example.com/idlab/function/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix coy: <https://schema.coypu.org/global#> .
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix : <https://mappings.coypu.org/pdl#> .
+
+:Source
+      rml:source "/data/PeopleDataLabsCompanies.csv";
+			rml:referenceFormulation ql:CSV.
+
+:CompanySizeMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source;
+
+  rr:subjectMap [
+    rr:template "https://schema.coypu.org/#CompanySize{size}" ;
+    rr:class rdfs:Class ;
+  ];
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:subClassOf ;
+      rr:object coy:CompanySizeGroup ;
+    ]
+    , [
+      rr:predicate rdfs:label ;
+      rr:objectMap [ rml:reference "size" ] ;
+    ].
+
+:NumberOfEmployeesMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:termType rr:BlankNode ;
+    rr:template "size/company/{id}" ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdf:type ;
+      rr:objectMap [
+        rr:parentTriplesMap :CompanySizeMap ;
+        rr:joinCondition [
+        rr:child "id" ;
+        rr:parent "id" ;
+        ] ;
+      ] ;
+    ].
+
+:GeometryMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:termType rr:BlankNode ;
+    rr:template "geometry/company/{id}" ;
+    rr:class geo:Geometry ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate geo:asWKT ;
+      rr:objectMap [
+      rr:template "Point({Longitude} {Latitude})" ;
+      rr:termType rr:Literal ;
+	    rr:datatype geo:wktLiteral
+	    ] ;
+    ];
+.
+
+:CountryMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:template "https://tests.coypu.org/pdl/country/{country}" ;
+    rr:class coy:Country ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:label ;
+      rr:objectMap [ rml:reference "country" ] ;
+    ]
+    , [
+      rr:predicate owl:sameAs ;
+      rr:objectMap _:_country_geonames_id_obj_map ;
+    ]
+    , [
+      rr:predicate coy:hasGeonamesId ;
+      rr:objectMap _:_country_geonames_id_obj_map ;
+    ]
+    , [
+      rr:predicate coy:hasCountryCode ;
+      rr:objectMap [ rml:reference "CountryCode" ] ;
+    ]
+    , [
+      rr:predicate wdt:P297 ;
+      rr:objectMap [ rml:reference "CountryCode" ] ;
+    ]
+.
+
+_:_country_geonames_id_obj_map
+  rr:termType rr:IRI ;
+  fnml:functionValue [
+  rml:logicalSource :Source;
+  rr:predicateObjectMap _:_fn_concat2
+	  , [
+	    rr:predicate  :value1;
+	    rr:objectMap [ rr:constant "https://sws.geonames.org/"]
+    ]
+    , [
+	    rr:predicate  :value2;
+	    rr:objectMap [
+      fnml:functionValue [
+      rml:logicalSource :Source;
+      rr:predicateObjectMap _:_fn_str_replace
+      , [
+      rr:predicate :valueParameter ;
+      rr:objectMap [ rml:reference "CountryGeonamesId"] ;
+        ]
+    , [
+      rr:predicate :p_string_find ;
+      rr:objectMap [ rr:constant ".0" ] ;
+    ]
+    , [
+      rr:predicate :p_string_replace ;
+      rr:objectMap [ rr:constant "/" ] ;
+    ]
+  ];
+  ];
+  ];].
+
+:IndustryClassMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:template "https://schema.coypu.org/#Industry%3A{industry}" ;
+    rr:class rdfs:Class ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:subClassOf ;
+      rr:object coy:Industry ;
+    ]
+    , [
+      rr:predicate rdfs:label ;
+      rr:objectMap [ rml:reference "industry" ] ;
+    ]
+.
+
+:LocalityMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:template "https://tests.coypu.org/pdl/location/{locality}" ;
+    rr:class coy:City ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdfs:label ;
+      rr:objectMap [ rml:reference "locality" ] ;
+    ]
+    , [
+      rr:predicate coy:hasPopulation ;
+      rr:objectMap [ 
+
+          fnml:functionValue [
+        rml:logicalSource :Source;
+  	    rr:predicateObjectMap _:_fn_str_replace
+  	    , [
+  	      rr:predicate :valueParameter ;
+  	      rr:objectMap [ rml:reference "Population" ] ;
+  	    ]
+  	    , [
+  	      rr:predicate :p_string_find ;
+  	      rr:objectMap [ rr:constant ".0" ] ;
+  	    ]
+  	    , [
+  	      rr:predicate :p_string_replace ;
+  	      rr:objectMap [ rr:constant "" ] ;
+  	    ]
+  	  ] ;
+          rr:datatype xsd:integer ;
+      ] ;
+    ]    
+    , [
+      rr:predicate coy:hasGeonamesType ;
+      rr:objectMap [ rml:reference "GeonamesType" ] ;
+    ]
+    , [
+      rr:objectMap [ rml:reference "region" ] ;
+    ]
+    , [
+      rr:predicate coy:hasRegion ;
+      rr:objectMap [
+        fnml:functionValue [
+    rml:logicalSource :Source;
+	  rr:predicateObjectMap _:_fn_if
+	  , [
+	    rr:predicate :bool_b ;
+	    rr:objectMap [ 
+
+	        fnml:functionValue [
+      rml:logicalSource :Source;
+		  rr:predicateObjectMap _:_fn_equal
+		  , [
+		    rr:predicate :valueParameter ;
+		    rr:objectMap [ rr:constant "" ] ;
+		  ]
+		  , [
+		    rr:predicate :valueParameter2 ;
+		    rr:objectMap [ rml:reference "region" ] ;
+		  ]
+		] ;
+
+	    ] ;
+	  ]
+
+	  , [
+	    rr:predicate :any_false ;
+	    rr:objectMap [ rml:reference "region" ] ;
+	  ]
+        ]
+      ] ;
+    ]
+    , [
+      rr:predicate coy:hasCountry ;
+      rr:objectMap [ rr:template "https://tests.coypu.org/pdl/country/{country}" ] ;
+    ]
+    , [
+      rr:predicate owl:sameAs ;
+      rr:objectMap _:_city_geonames_id_obj_map ;
+    ]
+    , [
+      rr:predicate coy:hasGeonamesId ;
+      rr:objectMap _:_city_geonames_id_obj_map ;
+    ]
+.
+
+_:_city_geonames_id_obj_map
+  rr:termType rr:IRI ;
+  fnml:functionValue [
+  rml:logicalSource :Source;
+  rr:predicateObjectMap _:_fn_concat2
+	  , [
+	    rr:predicate  :value1;
+	    rr:objectMap [ rr:constant "https://sws.geonames.org/"]
+    ]
+    , [
+	    rr:predicate  :value2;
+	    rr:objectMap [
+  fnml:functionValue [
+    rml:logicalSource :Source;
+    rr:predicateObjectMap _:_fn_str_replace
+    , [
+      rr:predicate :valueParameter ;
+      rr:objectMap [ rml:reference "CityGeonamesId" ] ;
+    ]
+    , [
+      rr:predicate :p_string_find ;
+      rr:objectMap [ rr:constant ".0" ] ;
+    ]
+    , [
+      rr:predicate :p_string_replace ;
+      rr:objectMap [ rr:constant "/" ] ;
+    ]
+   ];
+  ];
+  ];
+  ].
+
+:CompanyMap
+  a rr:TriplesMap ;
+  rml:logicalSource :Source ;
+
+  rr:subjectMap [
+    rr:template "https://tests.coypu.org/pdl/company/{id}" ;
+    rr:class coy:Company ;
+  ] ;
+
+  rr:predicateObjectMap
+    [
+      rr:predicate rdf:type ;
+      rr:objectMap [
+        rr:parentTriplesMap :IndustryClassMap ;
+	rr:joinCondition [
+	  rr:child "id" ;
+	  rr:parent "id" ;
+	] ;
+      ] ;
+    ]
+    , [
+      rr:predicate rdfs:label ;
+      rr:objectMap [ rml:reference "name" ] ;
+    ]
+    , [
+      rr:predicate coy:hasName ;
+      rr:objectMap [ rml:reference "name" ] ;
+    ]
+    , [
+      rr:predicate coy:hasId ;
+      rr:objectMap [ rml:reference "id" ] ;
+    ]
+    , [
+      rr:predicate coy:hasNumberOfEmployees;
+      rr:objectMap [
+        rr:parentTriplesMap :NumberOfEmployeesMap;
+	rr:joinCondition [
+	  rr:child "id" ;
+	  rr:parent "id" ;
+	] ;
+      ] ;
+    ]
+    , [
+      rr:predicate coy:hasFounded ;
+      rr:objectMap [
+        rr:datatype xsd:gYear ;
+        fnml:functionValue [
+    rml:logicalSource :Source;
+	  rr:predicateObjectMap _:_fn_if
+	  , [
+	    rr:predicate :bool_b ;
+	    rr:objectMap [ 
+
+	        fnml:functionValue [
+      rml:logicalSource :Source;
+		  rr:predicateObjectMap _:_fn_equal
+		  , [
+		    rr:predicate :valueParameter ;
+		    rr:objectMap [ rr:constant "" ] ;
+		  ]
+		  , [
+		    rr:predicate :valueParameter2 ;
+		    rr:objectMap [ rml:reference "founded" ] ;
+		  ]
+		] ;
+
+	    ] ;
+	  ]
+
+	  , [
+	    rr:predicate :any_false ;
+	    rr:objectMap [ 
+
+	    fnml:functionValue [
+      rml:logicalSource :Source;
+		  rr:predicateObjectMap _:_fn_str_replace
+		  , [
+		    rr:predicate :valueParameter ;
+		    rr:objectMap [ rml:reference "founded" ] ;
+		  ]
+		  , [
+		    rr:predicate :p_string_find ;
+		    rr:objectMap [ rr:constant ".0" ] ;
+		  ]
+		  , [
+		    rr:predicate :p_string_replace ;
+		    rr:objectMap [ rr:constant "" ] ;
+		  ]
+		] ;
+
+	    ] ;
+	  ]
+        ]
+      ] ;
+    ]
+    , [
+      rr:predicate geo:hasGeometry ;
+      rr:objectMap [
+        rr:parentTriplesMap :GeometryMap ;
+	rr:joinCondition [
+	  rr:child "id" ;
+	  rr:parent "id" ;
+	] ;
+      ] ;
+    ]
+    , [
+      rr:predicate coy:hasCountry ;
+      rr:objectMap [
+        rr:parentTriplesMap :CountryMap ;
+	rr:joinCondition [
+	  rr:child "id" ;
+	  rr:parent "id" ;
+	] ;
+      ] ;
+    ]
+    , [
+      rr:predicate coy:hasLocality ;
+      rr:objectMap [
+        rr:parentTriplesMap :LocalityMap ;
+	rr:joinCondition [
+	  rr:child "id" ;
+	  rr:parent "id" ;
+	] ;
+      ] ;
+    ]
+    , [
+      rr:predicate coy:hasCity ;
+      rr:objectMap [
+        rr:template "https://tests.coypu.org/pdl/location/{locality}" ;
+      ] ;
+    ]
+.
+
+
+_:_fn_concat2
+  rr:predicate fno:executes ;
+  rr:objectMap [ rr:constant :concat2 ].
+
+_:_fn_if
+  rr:predicate fno:executes ;
+  rr:objectMap [ rr:constant :controls_if ] ;
+.
+
+_:_fn_equal
+  rr:predicate fno:executes ;
+  rr:objectMap [ rr:constant :equal ] ;
+.
+
+_:_fn_str_replace
+  rr:predicate fno:executes ;
+  rr:objectMap [ rr:constant :string_replace ] ;
+.
+
