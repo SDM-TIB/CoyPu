@@ -8,3 +8,5 @@
 * Country Datasets
 * People Data Lab Company Dataset
 * Glief- Legal Entity Identifier Dataset
+* EuroStat Dataset
+* WorldBank Dataset
