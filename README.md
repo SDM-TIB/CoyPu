@@ -1,4 +1,6 @@
-## Coypu Project 
+# <a href="https://coypu.org/" style="color: dark-blue; text-decoration: underline;text-decoration-style: dotted;">Coypu Project</a>
+
+[![image](https://img.shields.io/badge/Coypu-L3S-green)](https://www.l3s.de/en/projects/coypu)
 CoyPu Project Knowledge graph creation pipeline, federated query engine and validation.
 
 
@@ -10,7 +12,7 @@ CoyPu Project Knowledge graph creation pipeline, federated query engine and vali
 * EuroStat Dataset
 * WorldBank Dataset
 
-#### Tasks
+#### Tools
 * Knowledge Graph Creation
   - SDM-Rdfizer
   - Dragoman
