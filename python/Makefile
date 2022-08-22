@@ -6,10 +6,11 @@ import os, webbrowser, sys
 
 from urllib.request import pathname2url
 
-## print ('sys.argv[1]',pathname2url(os.path.abspath(sys.argv[1])))
-## webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
-chrome_app_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-webbrowser.get(chrome_app_path).open(pathname2url(os.path.abspath(sys.argv[1])), new=1)
+# chrome_app_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+# print ('sys.argv[1]',"file:///Z:" + pathname2url(os.path.abspath(sys.argv[1])))
+# webbrowser.get(chrome_app_path).open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
+# webbrowser.get(chrome_app_path).open(pathname2url(os.path.abspath(sys.argv[1])), new=1)
+webbrowser.open("file:///Z:"+os.path.abspath(sys.argv[1]))
 endef
 export BROWSER_PYSCRIPT
 
