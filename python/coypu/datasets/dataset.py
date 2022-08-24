@@ -1,4 +1,7 @@
 class Dataset():
+    """Class for Dataset
+    """
+
     def __init__(self, name, *args, **kwrgs):
         self.name = name
 

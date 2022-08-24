@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Tests for `project_template` package."""
+"""Tests for `coypu` package."""
 
 import pytest
 

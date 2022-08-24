@@ -1,5 +1,5 @@
 import requests
-import credentials
+from .credentials import *
 import pandas as pd
 from io import StringIO
 print(__package__)
