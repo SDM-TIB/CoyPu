@@ -78,7 +78,7 @@ while true; do
                 echo '##################### Backing-up Graphs Data on Triple Store ##################'
                 rsync ssh 'cp /data/coypu/sparql_endpoint/data_load/*.nt /data/coypu/sparql_endpoint/data_backup/'
                 echo '##################### Sparql endpoint setup ##################'
-                scp ./docker_command.sh node2://data/coypu/sparql_endpoint/;
+                scp ./knowledge_graph_creation/docker_command.sh node2://data/coypu/sparql_endpoint/;
                 ssh node2 'cd /data/coypu/sparql_endpoint/ && ./docker_command.sh >out 2>error &';
                 sleep 60s;
                 ssh node2 'cat /data/coypu/sparql_endpoint/out || cat /data/coypu/sparql_endpoint/error &';
