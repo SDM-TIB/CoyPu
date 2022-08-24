@@ -5,7 +5,7 @@
 import pytest
 
 
-from coypu import coypu
+# from coypu import coypu
 
 
 @pytest.fixture
@@ -20,4 +20,4 @@ def response():
 def test_content(response):
     """Sample pytest test function with the pytest fixture as an argument."""
     # from coypu import coypu
-    # assert 
+    # assert
