@@ -1,0 +1,97 @@
+version: "2.2"
+services:
+  easyrml:
+    image: sdmtib/easyrml:2.0 # Update to latest version
+    hostname: easyrml
+    container_name: easyrml
+    domainname: coypu
+    volumes:
+      - ./knowledge_graph_creation/mappings/:/easyRML/sources/
+    ports:
+      - "5000:5000"
+    networks:
+      - coypu_net
+
+  semantic-enrichment:
+    image: eiglesias34/sdmrdffizer:4.4.3 # Update to latest version
+    hostname: semantic-enrichment
+    container_name: semantic_enrichment
+    domainname: coypu
+    volumes:
+      - ./data:/data/
+      - ./knowledge_graph_creation/:/knowledge_graph_creation/
+      - ./generated_rdf_graphs/:/generated_rdf_graphs/
+    ports:
+      - "4000:4000"
+    networks:
+      - coypu_net
+
+  dragoman:
+    image: sdmtib/dragoman:1.8.3 # Update to latest version
+    hostname: dragoman
+    container_name: dragoman
+    domainname: coypu
+    volumes:
+      - ./data:/data
+      - ./knowledge_graph_creation:/knowledge_graph_creation/
+      - ./knowledge_graph_creation/mapping_funcs/:/knowledge_graph_creation/mapping_funcs/
+    ports:
+      - "6000:4000"
+    networks:
+      - coypu_net
+
+  graphdb:
+    image: khaller/graphdb-free:latest # Update to latest version
+    hostname: graphdb
+    container_name: graphdb
+    domainname: coypu
+    restart: unless-stopped
+    volumes:
+      - ./graphdb-home/:/opt/graphdb/data/
+    ports:
+      - 7200:7200
+    networks:
+      - coypu_net
+
+  # #  dashbaord:
+  valsparql:
+    image: valsparql # Update to latest version
+    hostname: valsparql
+    container_name: valsparql
+    domainname: coypu
+    volumes:
+      - ./knowledge_graph_validation/inputs/api_configs/:/inputs/api_configs/
+      - ./knowledge_graph_validation/inputs/shapes/:/inputs/shapes/
+    mem_limit: 8g
+    ports:
+      - '5001:5000'
+    networks:
+      - coypu_net
+  lubm:
+    image: prohde/virtuoso-opensource-7:7.2.6-alpine # Update to latest version
+    hostname: lubm
+    container_name: lubm
+    domainname: coypu
+    volumes:
+      - ./generated_rdf_graphs/:/database/toLoad/
+    ports:
+      - '15000:8890'
+    networks:
+      - coypu_net
+
+  detrusty:
+    image: sdmtib/detrusty:latest # Update to latest version
+    hostname: detrusty
+    container_name: detrusty
+    domainname: coypu
+    volumes:
+      - ./knowledge_graph_exploration/Detrusty/Config/:/DeTrusty/Config/
+      - ./knowledge_graph_exploration/Detrusty/Query/:/DeTrusty/Query/
+    ports:
+      - "5002:5000"
+    networks:
+      - coypu_net
+
+networks:
+  coypu_net:
+    external: true
