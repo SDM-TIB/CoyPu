@@ -5,13 +5,13 @@ Welcome to Coypu Project's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   readme
-   installation
-   usage
-   modules
-   contributing
-   authors
-   history
+   Readme
+   Installation
+   Usage
+   Modules
+   Contributing
+   Authors
+   History
 
 Indices and tables
 ==================

@@ -14,14 +14,6 @@ To install coypu, run this command in your terminal:
 
     $ pip install coypu
 
-This is the preferred method to install coypu, as it will always install the most recent stable release.
-
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
-
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
-
 
 From sources
 ------------
@@ -32,13 +24,8 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/SDM-TIB/CoyPu/tree/main/python
-
-Or download the `tarball`_:
-
-.. code-block:: console
-
-    $ curl -OJL https://github.com/SDM-TIB/CoyPu/tree/main/python/tarball/master
+    $ git clone git://github.com/SDM-TIB/CoyPu/
+    $ cd python
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +34,3 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/SDM-TIB/CoyPu/python
-.. _tarball: https://github.com/SDM-TIB/CoyPu/tree/main/python/tarball/master

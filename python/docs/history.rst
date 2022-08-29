@@ -1,1 +1,8 @@
-.. mdinclude:: ../HISTORY.md
+=======
+History
+=======
+
+0.1.0 (20-08-2022)
+------------------
+
+* First release
