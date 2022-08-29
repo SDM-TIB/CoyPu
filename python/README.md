@@ -1,6 +1,6 @@
 # Coypu Python Project
 
-[![image](https://img.shields.io/travis/coypu/project.svg)](https://travis-ci.com/coypu/project)
+[![image](https://img.shields.io/badge/coypu-travis-red.svg)](https://travis-ci.com/coypu/project)
 [![image](https://img.shields.io/badge/python-3-green)](https://www.python.org/about/)
 
 #### Datasets

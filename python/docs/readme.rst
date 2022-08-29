@@ -2,10 +2,10 @@
 Schema Linking Package
 =========================
 
-.. image:: https://img.shields.io/pypi/v/coypu.svg
+.. image:: https://img.shields.io/badge/pip-0.1.0-green
         :target: https://pypi.python.org/pypi/coypu
 
-.. image:: https://img.shields.io/travis/vyasakhilesh/coypu.svg
+.. image:: https://img.shields.io/badge/coypu-travis-red
         :target: https://travis-ci.com/vyasakhilesh/coypu
 
 .. image:: https://readthedocs.org/projects/coypu/badge/?version=latest
