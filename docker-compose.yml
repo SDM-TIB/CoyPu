@@ -20,7 +20,7 @@ services:
     volumes:
       - ./data:/data/
       - ./knowledge_graph_creation/:/knowledge_graph_creation/
-      - ./generated_rdf_graphs/:/generated_rdf_graphs/
+      - ./generated_rdf_graph_data/:/generated_rdf_graph_data/
     ports:
       - "4000:4000"
     networks:
@@ -73,7 +73,7 @@ services:
     container_name: lubm
     domainname: coypu
     volumes:
-      - ./generated_rdf_graphs/:/database/toLoad/
+      - ./generated_rdf_graph_data/:/database/toLoad/
     ports:
       - '15000:8890'
     networks:
