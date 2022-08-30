@@ -1,7 +1,5 @@
 # data files
-data/
 graphdb-home/repositories/
-generated_rdf_graphs/
 *.nt
 *.csv
 *.xlsx
