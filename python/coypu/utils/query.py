@@ -80,9 +80,6 @@ class FusekiQuery(Query):
 
 def main(client_url='', client_id='', client_secret='',
          query="""SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""):
-    query = """PREFIX  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""
     
     cmemc_query = CMEMCQuery(client_url, client_id, client_secret)
     print(cmemc_query.get_answer(query))
@@ -92,5 +89,10 @@ def main(client_url='', client_id='', client_secret='',
     
 
 if __name__ == "__main__":
+    
+    query = """PREFIX  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""
+        
     main(client_url_tib, client_id_tib,
-         client_secret_tib)
+         client_secret_tib, query)
