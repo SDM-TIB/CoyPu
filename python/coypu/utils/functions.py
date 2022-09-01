@@ -1,5 +1,7 @@
 from random import random
 import pandas as pd
+import requests
+import base64
 
 
 def replace(self, updated_file: str, replace: dict = {'\'': ''},
@@ -12,6 +14,11 @@ def replace(self, updated_file: str, replace: dict = {'\'': ''},
     del df
 
 
+def get_auth(func):
+    def wrapper(self,  query, ret_format):
+        return func(self,  query, ret_format)
+    return wrapper
+
 def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
                     chunksize: int = 100000, random_state: int = 1,
                     index: bool = False):
@@ -22,3 +29,28 @@ def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
         break
     df.to_csv(updated_file, index=index)
     del df
+
+def get_auth_os2(func):
+    def wrapper(self, query, ret_format='text/csv'):
+        url = self.url + "/auth/realms/cmem/protocol/openid-connect/token"
+        payload = 'grant_type=client_credentials&client_id={}&client_secret={}'\
+            .format(self.id_or_user, self.pass_or_secret)
+
+        headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        if response.status_code == 200:
+            self.auth = 'Bearer ' + response.json()['access_token']
+        
+        return func(self, query, ret_format)
+    return wrapper
+
+def get_auth_basic(func):
+    def wrapper(self, query, ret_format='text/csv'):
+        usr_pass = self.id_or_user + ':' + self.pass_or_secret
+        self.auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
+        return func(self, query, ret_format='text/csv')
+    return wrapper

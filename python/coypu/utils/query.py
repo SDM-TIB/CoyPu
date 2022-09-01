@@ -1,8 +1,8 @@
 import requests
 from credentials import *
+from functions import *
 import pandas as pd
 from io import StringIO
-import base64
 print(__package__)
 
 class Query:
@@ -10,35 +10,18 @@ class Query:
         self.url = url
         self.id_or_user = id_or_user
         self.pass_or_secret = pass_or_secret
-        self.get_auth_()
-        
-    def get_auth_(self):
+    
+    @get_auth
+    def get_answer(self, query, ret_format='text/csv'):
         pass
     
-    def get_answer(self, query, re_format='text/csv'):
-        pass
-        
-    
+
 class CMEMCQuery(Query):
     def __init__(self, url, id_or_user, pass_or_secret):
         super().__init__(url, id_or_user, pass_or_secret)
-        
-    def get_auth_(self):
-        url = self.url + "/auth/realms/cmem/protocol/openid-connect/token"
-        payload = 'grant_type=client_credentials&client_id={}&client_secret={}'\
-                .format(self.id_or_user, self.pass_or_secret)
-
-        headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                  }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        if response.status_code == 200:
-            self.auth = 'Bearer ' + response.json()['access_token']
-        return None
     
-    def get_answer(self, query, re_format='text/csv'):
+    @get_auth_os2
+    def get_answer(self, query, ret_format='text/csv'):
         url = self.url + "/dataplatform/proxy/default/sparql"
         headers = {
                 'Content-Type': 'application/sparql-query',
@@ -56,19 +39,13 @@ class CMEMCQuery(Query):
 class FusekiQuery(Query):
     def __init__(self, url, id_or_user, pass_or_secret):
         super().__init__(url, id_or_user, pass_or_secret)
-    
-    
-    def get_auth_(self):
-        usr_pass = self.id_or_user + ':' + self.pass_or_secret
-        self.auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
-        return None
 
-
-    def get_answer(self, query, re_format='text/csv'):
+    @get_auth_basic
+    def get_answer(self, query, ret_format='text/csv'):
         url = self.url
         headers = {
                 'Content-Type': 'application/sparql-query',
-                'Accept': re_format,  # text/html
+                'Accept': ret_format,  # text/html
                 'Authorization': self.auth}
         response = requests.request("POST", url, headers=headers, data=query)
 
@@ -83,6 +60,7 @@ def main(client_url='', client_id='', client_secret='',
     
     cmemc_query = CMEMCQuery(client_url, client_id, client_secret)
     print(cmemc_query.get_answer(query))
+    
     
     fuseki_query = FusekiQuery(fuseki_endpoint, fuseki_user_infai, fuseki_pw_infai)
     print (fuseki_query.get_answer(query))
