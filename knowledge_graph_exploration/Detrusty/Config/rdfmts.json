@@ -577,9 +577,9 @@
       }
     ],
     "linkedTo": [
+      "https://www.gleif.org/ontology/L2/AccountingConsolidation",
       "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry",
-      "https://www.gleif.org/ontology/Base/PhysicalAddress",
-      "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+      "https://www.gleif.org/ontology/Base/PhysicalAddress"
     ],
     "wrappers": [
       {
@@ -953,9 +953,9 @@
       }
     ],
     "linkedTo": [
+      "https://www.gleif.org/ontology/L2/AccountingConsolidation",
       "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry",
-      "https://www.gleif.org/ontology/Base/PhysicalAddress",
-      "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+      "https://www.gleif.org/ontology/Base/PhysicalAddress"
     ],
     "wrappers": [
       {
