@@ -29,7 +29,7 @@
     rml:logicalSource :Source;
     
     rr:subjectMap [
-        rr:template "https://data.coypu.org/lei/{LEI}"; # need to be changed {iso}_{year}
+        rr:template "https://data.coypu.org/lei/{LEI}"; 
         rr:class gleif-L1:LegalEntity;
     ];
 
@@ -220,12 +220,12 @@
     ];
 
      rr:predicateObjectMap [
-        rr:predicate gleif-base:hasRegion;
+        rr:predicate coy:hasSubdivision;
         rr:objectMap [ rml:reference "Entity.LegalAddress.Region"];
     ];
 
     rr:predicateObjectMap [
-        rr:predicate gleif-base:hasCountry;
+        rr:predicate coy:hasIso2Code;
         rr:objectMap [ rml:reference "Entity.LegalAddress.Country"];
     ];
 
@@ -324,7 +324,7 @@
     rml:logicalSource :Source1;
   
     rr:subjectMap [
-        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}-{Relationship.EndNode.NodeID}"; # need to be changed {iso}_{year}
+        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}-{Relationship.EndNode.NodeID}"; 
         rr:class gleif-L2:AccountingConsolidation;
 
     ];
@@ -353,7 +353,7 @@
     rml:logicalSource :Source1;
   
     rr:subjectMap [
-        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}-{Relationship.EndNode.NodeID}-Period"; # need to be changed {iso}_{year}
+        rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}-{Relationship.EndNode.NodeID}-Period"; 
         rr:class gleif-base:Period;
     ];
 

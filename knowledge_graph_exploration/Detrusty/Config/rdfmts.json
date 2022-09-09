@@ -1,1 +1,1116 @@
-[{"rootType": "https://schema.coypu.org/CountryStatistics", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasExposure", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasGYear", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasRiskLevel", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://schema.coypu.org/hasExposure", "https://schema.coypu.org/hasGYear", "https://schema.coypu.org/hasRiskLevel"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://schema.coypu.org/Country", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "http://www.w3.org/2000/01/rdf-schema#label", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "http://www.w3.org/2000/01/rdf-schema#alternateName", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasWikiUri", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasCountryStatistics", "range": ["https://schema.coypu.org/CountryStatistics"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasIsoCode", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": ["https://schema.coypu.org/CountryStatistics"], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/2000/01/rdf-schema#label", "http://www.w3.org/2000/01/rdf-schema#alternateName", "https://schema.coypu.org/hasWikiUri", "https://schema.coypu.org/hasCountryStatistics", "https://schema.coypu.org/hasIsoCode"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://schema.coypu.org/Disaster", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "http://www.w3.org/2000/01/rdf-schema#label", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasGYear", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEndGYear", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventGroupType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventID", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventMagnitude", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventMagnitudeScale", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasLocation", "range": ["https://schema.coypu.org/Country"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasStartGYear", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasTotalAffected", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasAlertScore", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasDateTimeStamp", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasEventStatus", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasLatitude", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasLongitude", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/hasUrl", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": ["https://schema.coypu.org/Country"], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.w3.org/2000/01/rdf-schema#label", "https://schema.coypu.org/hasGYear", "https://schema.coypu.org/hasEndGYear", "https://schema.coypu.org/hasEventGroupType", "https://schema.coypu.org/hasEventID", "https://schema.coypu.org/hasEventMagnitude", "https://schema.coypu.org/hasEventMagnitudeScale", "https://schema.coypu.org/hasEventType", "https://schema.coypu.org/hasLocation", "https://schema.coypu.org/hasStartGYear", "https://schema.coypu.org/hasTotalAffected", "https://schema.coypu.org/hasAlertScore", "https://schema.coypu.org/hasDateTimeStamp", "https://schema.coypu.org/hasEventStatus", "https://schema.coypu.org/hasLatitude", "https://schema.coypu.org/hasLongitude", "https://schema.coypu.org/hasUrl"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/L2/AccountingConsolidation", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L2/hasRelationshipStatus", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L2/hasParent", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L2/hasRelationshipPeriod", "range": ["https://www.gleif.org/ontology/Base/Period"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L2/hasRelationshipType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": ["https://www.gleif.org/ontology/Base/Period"], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://www.gleif.org/ontology/L2/hasRelationshipStatus", "https://www.gleif.org/ontology/L2/hasParent", "https://www.gleif.org/ontology/L2/hasRelationshipPeriod", "https://www.gleif.org/ontology/L2/hasRelationshipType"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/Base/Period", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasEnd", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasStart", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L2/hasRelationshipPeriodType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://www.gleif.org/ontology/Base/hasEnd", "https://www.gleif.org/ontology/Base/hasStart", "https://www.gleif.org/ontology/L2/hasRelationshipPeriodType"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://schema.coypu.org/global#LegalEntity", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalEntityType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRelationshipInfo", "range": ["https://www.gleif.org/ontology/L2/AccountingConsolidation"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasCreationDate", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasHeadquartersAddress", "range": ["https://www.gleif.org/ontology/Base/PhysicalAddress"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasLegalAddress", "range": ["https://www.gleif.org/ontology/Base/PhysicalAddress"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasLegalName", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityCategory", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityRegistrationInfo", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityStatus", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalFormCode", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalJurisdictionRegion", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRegistration", "range": ["https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": ["https://www.gleif.org/ontology/L2/AccountingConsolidation", "https://www.gleif.org/ontology/Base/PhysicalAddress", "https://www.gleif.org/ontology/Base/PhysicalAddress", "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://schema.coypu.org/global#hasLegalEntityType", "https://schema.coypu.org/global#hasRelationshipInfo", "https://www.gleif.org/ontology/L1/hasCreationDate", "https://www.gleif.org/ontology/L1/hasHeadquartersAddress", "https://www.gleif.org/ontology/L1/hasLegalAddress", "https://www.gleif.org/ontology/L1/hasLegalName", "https://schema.coypu.org/global#hasEntityCategory", "https://schema.coypu.org/global#hasEntityRegistrationInfo", "https://schema.coypu.org/global#hasEntityStatus", "https://schema.coypu.org/global#hasLegalFormCode", "https://schema.coypu.org/global#hasLegalJurisdictionRegion", "https://schema.coypu.org/global#hasRegistration"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/L1/LegalEntity", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalEntityType", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRelationshipInfo", "range": ["https://www.gleif.org/ontology/L2/AccountingConsolidation"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasCreationDate", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasHeadquartersAddress", "range": ["https://www.gleif.org/ontology/Base/PhysicalAddress"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasLegalAddress", "range": ["https://www.gleif.org/ontology/Base/PhysicalAddress"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/L1/hasLegalName", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityCategory", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityRegistrationInfo", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasEntityStatus", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalFormCode", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasLegalJurisdictionRegion", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRegistration", "range": ["https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": ["https://www.gleif.org/ontology/L2/AccountingConsolidation", "https://www.gleif.org/ontology/Base/PhysicalAddress", "https://www.gleif.org/ontology/Base/PhysicalAddress", "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://schema.coypu.org/global#hasLegalEntityType", "https://schema.coypu.org/global#hasRelationshipInfo", "https://www.gleif.org/ontology/L1/hasCreationDate", "https://www.gleif.org/ontology/L1/hasHeadquartersAddress", "https://www.gleif.org/ontology/L1/hasLegalAddress", "https://www.gleif.org/ontology/L1/hasLegalName", "https://schema.coypu.org/global#hasEntityCategory", "https://schema.coypu.org/global#hasEntityRegistrationInfo", "https://schema.coypu.org/global#hasEntityStatus", "https://schema.coypu.org/global#hasLegalFormCode", "https://schema.coypu.org/global#hasLegalJurisdictionRegion", "https://schema.coypu.org/global#hasRegistration"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/Base/PhysicalAddress", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasAddressLine1", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasAddressLine2", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasAddressLine3", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasAddressNumber", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasAddressNumberWithinBuilding", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasCity", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasCountry", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasFirstAddressLine", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasMailRouting", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasPostalCode", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://www.gleif.org/ontology/Base/hasRegion", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://www.gleif.org/ontology/Base/hasAddressLine1", "https://www.gleif.org/ontology/Base/hasAddressLine2", "https://www.gleif.org/ontology/Base/hasAddressLine3", "https://www.gleif.org/ontology/Base/hasAddressNumber", "https://www.gleif.org/ontology/Base/hasAddressNumberWithinBuilding", "https://www.gleif.org/ontology/Base/hasCity", "https://www.gleif.org/ontology/Base/hasCountry", "https://www.gleif.org/ontology/Base/hasFirstAddressLine", "https://www.gleif.org/ontology/Base/hasMailRouting", "https://www.gleif.org/ontology/Base/hasPostalCode", "https://www.gleif.org/ontology/Base/hasRegion"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/L1/BusinessValidationIdentifier", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#ValidationAuthorityEntityID", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#ValidationAuthorityID", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://schema.coypu.org/global#ValidationAuthorityEntityID", "https://schema.coypu.org/global#ValidationAuthorityID"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRegistrationAuthorityEntityID", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "https://schema.coypu.org/global#hasRegistrationAuthorityID", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "https://schema.coypu.org/global#hasRegistrationAuthorityEntityID", "https://schema.coypu.org/global#hasRegistrationAuthorityID"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}, {"rootType": "http://www.opengis.net/ont/geosparql#Geometry", "predicates": [{"predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}, {"predicate": "http://www.opengis.net/ont/geosparql#asWKT", "range": [], "policies": [{"dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "operator": "PR"}]}], "linkedTo": [], "wrappers": [{"url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/", "predicates": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://www.opengis.net/ont/geosparql#asWKT"], "urlparam": "", "wrapperType": "SPARQLEndpoint"}]}]
+[
+  {
+    "rootType": "https://schema.coypu.org/Country",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#alternateName",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasWikiUri",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasCountryStatistics",
+        "range": [
+          "https://schema.coypu.org/CountryStatistics"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasIsoCode",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [
+      "https://schema.coypu.org/CountryStatistics"
+    ],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "http://www.w3.org/2000/01/rdf-schema#label",
+          "http://www.w3.org/2000/01/rdf-schema#alternateName",
+          "https://schema.coypu.org/hasWikiUri",
+          "https://schema.coypu.org/hasCountryStatistics",
+          "https://schema.coypu.org/hasIsoCode"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://schema.coypu.org/CountryStatistics",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasExposure",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasGYear",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasRiskLevel",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://schema.coypu.org/hasExposure",
+          "https://schema.coypu.org/hasGYear",
+          "https://schema.coypu.org/hasRiskLevel"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://schema.coypu.org/Disaster",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasGYear",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEndGYear",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventGroupType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventID",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventMagnitude",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventMagnitudeScale",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasLocation",
+        "range": [
+          "https://schema.coypu.org/Country"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasStartGYear",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasTotalAffected",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasAlertScore",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasDateTimeStamp",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasEventStatus",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasLatitude",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasLongitude",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/hasUrl",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [
+      "https://schema.coypu.org/Country"
+    ],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "http://www.w3.org/2000/01/rdf-schema#label",
+          "https://schema.coypu.org/hasGYear",
+          "https://schema.coypu.org/hasEndGYear",
+          "https://schema.coypu.org/hasEventGroupType",
+          "https://schema.coypu.org/hasEventID",
+          "https://schema.coypu.org/hasEventMagnitude",
+          "https://schema.coypu.org/hasEventMagnitudeScale",
+          "https://schema.coypu.org/hasEventType",
+          "https://schema.coypu.org/hasLocation",
+          "https://schema.coypu.org/hasStartGYear",
+          "https://schema.coypu.org/hasTotalAffected",
+          "https://schema.coypu.org/hasAlertScore",
+          "https://schema.coypu.org/hasDateTimeStamp",
+          "https://schema.coypu.org/hasEventStatus",
+          "https://schema.coypu.org/hasLatitude",
+          "https://schema.coypu.org/hasLongitude",
+          "https://schema.coypu.org/hasUrl"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/L2/AccountingConsolidation",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L2/hasRelationshipStatus",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L2/hasParent",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L2/hasRelationshipPeriod",
+        "range": [
+          "https://www.gleif.org/ontology/Base/Period"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L2/hasRelationshipType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [
+      "https://www.gleif.org/ontology/Base/Period"
+    ],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://www.gleif.org/ontology/L2/hasRelationshipStatus",
+          "https://www.gleif.org/ontology/L2/hasParent",
+          "https://www.gleif.org/ontology/L2/hasRelationshipPeriod",
+          "https://www.gleif.org/ontology/L2/hasRelationshipType"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://schema.coypu.org/global#LegalEntity",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalEntityType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRelationshipInfo",
+        "range": [
+          "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasCreationDate",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasHeadquartersAddress",
+        "range": [
+          "https://www.gleif.org/ontology/Base/PhysicalAddress"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasLegalAddress",
+        "range": [
+          "https://www.gleif.org/ontology/Base/PhysicalAddress"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasLegalName",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityCategory",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityRegistrationInfo",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityStatus",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalFormCode",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalJurisdictionRegion",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRegistration",
+        "range": [
+          "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [
+      "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry",
+      "https://www.gleif.org/ontology/Base/PhysicalAddress",
+      "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+    ],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://schema.coypu.org/global#hasLegalEntityType",
+          "https://schema.coypu.org/global#hasRelationshipInfo",
+          "https://www.gleif.org/ontology/L1/hasCreationDate",
+          "https://www.gleif.org/ontology/L1/hasHeadquartersAddress",
+          "https://www.gleif.org/ontology/L1/hasLegalAddress",
+          "https://www.gleif.org/ontology/L1/hasLegalName",
+          "https://schema.coypu.org/global#hasEntityCategory",
+          "https://schema.coypu.org/global#hasEntityRegistrationInfo",
+          "https://schema.coypu.org/global#hasEntityStatus",
+          "https://schema.coypu.org/global#hasLegalFormCode",
+          "https://schema.coypu.org/global#hasLegalJurisdictionRegion",
+          "https://schema.coypu.org/global#hasRegistration"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/Base/Period",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasEnd",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasStart",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L2/hasRelationshipPeriodType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://www.gleif.org/ontology/Base/hasEnd",
+          "https://www.gleif.org/ontology/Base/hasStart",
+          "https://www.gleif.org/ontology/L2/hasRelationshipPeriodType"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/Base/PhysicalAddress",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasAddressLine1",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasAddressLine2",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasAddressLine3",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasAddressNumber",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasAddressNumberWithinBuilding",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasCity",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasCountry",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasFirstAddressLine",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasMailRouting",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasPostalCode",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/Base/hasRegion",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://www.gleif.org/ontology/Base/hasAddressLine1",
+          "https://www.gleif.org/ontology/Base/hasAddressLine2",
+          "https://www.gleif.org/ontology/Base/hasAddressLine3",
+          "https://www.gleif.org/ontology/Base/hasAddressNumber",
+          "https://www.gleif.org/ontology/Base/hasAddressNumberWithinBuilding",
+          "https://www.gleif.org/ontology/Base/hasCity",
+          "https://www.gleif.org/ontology/Base/hasCountry",
+          "https://www.gleif.org/ontology/Base/hasFirstAddressLine",
+          "https://www.gleif.org/ontology/Base/hasMailRouting",
+          "https://www.gleif.org/ontology/Base/hasPostalCode",
+          "https://www.gleif.org/ontology/Base/hasRegion"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/L1/LegalEntity",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalEntityType",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRelationshipInfo",
+        "range": [
+          "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasCreationDate",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasHeadquartersAddress",
+        "range": [
+          "https://www.gleif.org/ontology/Base/PhysicalAddress"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasLegalAddress",
+        "range": [
+          "https://www.gleif.org/ontology/Base/PhysicalAddress"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://www.gleif.org/ontology/L1/hasLegalName",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityCategory",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityRegistrationInfo",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasEntityStatus",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalFormCode",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasLegalJurisdictionRegion",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRegistration",
+        "range": [
+          "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry"
+        ],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [
+      "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry",
+      "https://www.gleif.org/ontology/Base/PhysicalAddress",
+      "https://www.gleif.org/ontology/L2/AccountingConsolidation"
+    ],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://schema.coypu.org/global#hasLegalEntityType",
+          "https://schema.coypu.org/global#hasRelationshipInfo",
+          "https://www.gleif.org/ontology/L1/hasCreationDate",
+          "https://www.gleif.org/ontology/L1/hasHeadquartersAddress",
+          "https://www.gleif.org/ontology/L1/hasLegalAddress",
+          "https://www.gleif.org/ontology/L1/hasLegalName",
+          "https://schema.coypu.org/global#hasEntityCategory",
+          "https://schema.coypu.org/global#hasEntityRegistrationInfo",
+          "https://schema.coypu.org/global#hasEntityStatus",
+          "https://schema.coypu.org/global#hasLegalFormCode",
+          "https://schema.coypu.org/global#hasLegalJurisdictionRegion",
+          "https://schema.coypu.org/global#hasRegistration"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/L1/BusinessValidationIdentifier",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#ValidationAuthorityEntityID",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#ValidationAuthorityID",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://schema.coypu.org/global#ValidationAuthorityEntityID",
+          "https://schema.coypu.org/global#ValidationAuthorityID"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "https://www.gleif.org/ontology/L1/gleif-ra:BusinessRegistry",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRegistrationAuthorityEntityID",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "https://schema.coypu.org/global#hasRegistrationAuthorityID",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "https://schema.coypu.org/global#hasRegistrationAuthorityEntityID",
+          "https://schema.coypu.org/global#hasRegistrationAuthorityID"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  },
+  {
+    "rootType": "http://www.opengis.net/ont/geosparql#Geometry",
+    "predicates": [
+      {
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      },
+      {
+        "predicate": "http://www.opengis.net/ont/geosparql#asWKT",
+        "range": [],
+        "policies": [
+          {
+            "dataset": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+            "operator": "PR"
+          }
+        ]
+      }
+    ],
+    "linkedTo": [],
+    "wrappers": [
+      {
+        "url": "https://labs.tib.eu/sdm/coypu-endpoint/sparql/",
+        "predicates": [
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "http://www.opengis.net/ont/geosparql#asWKT"
+        ],
+        "urlparam": "",
+        "wrapperType": "SPARQLEndpoint"
+      }
+    ]
+  }
+]

@@ -4,6 +4,7 @@ graphdb-home/repositories/
 *.csv
 *.xlsx
 *.ini
+endpoints.json
 
 # private data files
 credentials.py
