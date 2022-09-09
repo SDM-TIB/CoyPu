@@ -8,6 +8,7 @@ graphdb-home/repositories/
 endpoints.json
 endpoints.txt
 generated_rdf_graph_data/*.ttl
+query_results/*.json
 
 # private data files
 credentials.py

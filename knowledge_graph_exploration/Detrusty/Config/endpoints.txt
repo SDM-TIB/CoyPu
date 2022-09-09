@@ -1,2 +1,0 @@
-https://labs.tib.eu/sdm/coypu-endpoint/sparql/
-http://node2.research.tib.eu:11381/sparql/
