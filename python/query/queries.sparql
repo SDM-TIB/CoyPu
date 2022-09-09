@@ -1,0 +1,150 @@
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?lat ?lon ?iso ?type ?time
+FROM <https: //data.coypu.org />
+WHERE {
+?company a coy:Disaster ;
+rdfs:label ?name ;
+coy:hasLatitude ?lat ;
+coy:hasLongitude ?lon ;
+coy:hasIsoCode ?iso;
+coy:hasEventType ?type ;
+coy:hasTimestamp ?time .
+} ORDER BY DESC(?time) LIMIT 100
+
+
+PREFIX coy: <https: //schema.coypu.org/global#>
+PREFIX rdfs: <http: //www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?iri ?hasName ?hasFatalities ?hasLocation ?hasActor ?hasLatitude ?hasLongitude ?hasIsoCode
+?hasTimestamp
+FROM <https: //data.coypu.org />
+WHERE {
+?iri a coy:AcledEvent ;
+rdfs:label ?hasName ;
+coy:hasFatalities ?hasFatalities ;
+coy:hasLocation ?hasLocation ;
+coy:hasActor ?hasActor ;
+coy:hasLatitude ?hasLatitude ;
+coy:hasLongitude ?hasLongitude ;
+coy:hasIsoCode ?hasIsoCode ;
+coy:hasTimestamp ?hasTimestamp .
+} LIMIT 100
+
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?lat ?lon ?fun
+FROM <https://data.coypu.org/>
+WHERE {
+  ?company a coy:Company ;
+    coy:hasName ?name ;
+    coy:isSupplierOf "airbus" ;
+    coy:hasLatitude ?lat ;
+    coy:hasLongitude ?lon ;
+    coy:hasFunction ?fun .
+    }
+
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?lat ?lon ?fun
+FROM <https://data.coypu.org/>
+WHERE {
+  ?company a coy:Company ;
+    coy:hasName ?name ;
+    coy:isSupplierOf "ferrero" ;
+    coy:hasLatitude ?lat ;
+    coy:hasLongitude ?lon ;
+    coy:hasFunction ?fun .
+    }
+
+PREFIX ips: <https://schema.implisense.com/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?supplierType ?lat ?lon
+FROM <https://demo.implisense.com/>
+WHERE{
+    ?company a ips:Company ;
+        ips:supplierOf "lidl" .
+    OPTIONAL { ?company ips:name ?name }
+    OPTIONAL { ?company ips:supplierType ?supplierType }
+    OPTIONAL { ?company ips:latitude ?lat }
+    OPTIONAL { ?company ips:longitude ?lon }
+    FILTER (?lat || ?lon = "")
+}
+
+
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?commodity ?name ?warning ?time
+FROM <https://data.coypu.org/>
+WHERE {
+    ?commodity a coy:Commodity  ;
+        coy:hasName ?name ;
+        coy:hasVolatility ?warning ;
+        coy:hasTimestamp ?time .
+}
+
+
+PREFIX ips: <https://schema.implisense.com/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?created ?name ?risk
+FROM <https://demo.implisense.com/>
+WHERE { 
+    ?event a ips:Crisis ;
+        ips:isoCode ?iso ;
+        ips:impacts ?country ;
+        ips:created ?created ;
+        ips:name ?name .
+    ?country ips:riskLevel ?risk .
+} ORDER BY DESC(?created)
+
+
+PREFIX ips: <https://schema.implisense.com/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?iso ?risk
+FROM <https://demo.implisense.com/>
+WHERE{
+    ?country a ips:Country ;
+        ips:isoCode ?iso ;
+        ips:riskLevel ?risk .
+}
+
+
+PREFIX ips: <https://schema.implisense.com/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?id ?backbone ?outflows ?latitude ?longitude
+FROM <https://demo.implisense.com/>
+WHERE{
+    ?port a ips:Infrastructure ;
+    	ips:infrastructureType "port"  ;
+        ips:id ?id ;
+        ips:backboneScore ?backbone ;
+        ips:outflows ?outflows ;
+        ips:name ?name ;
+        ips:latitude ?latitude ;
+        ips:longitude ?longitude .
+} ORDER BY DESC(?backbone) LIMIT 120
+
+
+PREFIX ips: <https://schema.implisense.com/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?longitude ?latitude ?name ?fuel ?capacity
+FROM <https://demo.implisense.com/>
+WHERE{
+    ?powerplant a ips:Infrastructure ;
+        ips:infrastructureType "powerplant"  ;
+        ips:latitude ?latitude ;
+        ips:longitude ?longitude ;
+        ips:name ?name ;
+        ips:fuel ?fuel ;
+        ips:capacity ?capacity .
+}
+
