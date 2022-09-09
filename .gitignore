@@ -5,9 +5,7 @@ graphdb-home/repositories/
 *.xlsx
 *.ini
 endpoints.json
-generated_rdf_graph_data/ISO3166-1-CountryCodes-Adjunct.ttl
-generated_rdf_graph_data/L1Data.ttl
-generated_rdf_graph_data/L2Data.ttl
+generated_rdf_graph_data/*.ttl
 
 # private data files
 credentials.py
