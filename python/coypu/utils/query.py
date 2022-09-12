@@ -63,8 +63,8 @@ def main(client_url='', client_id='', client_secret='',
     print(cmemc_query.get_answer(query))
     
     
-    fuseki_query = FusekiQuery(fuseki_endpoint, fuseki_user_infai, fuseki_pw_infai)
-    print (fuseki_query.get_answer(query))
+#    fuseki_query = FusekiQuery(fuseki_endpoint, fuseki_user_infai, fuseki_pw_infai)
+#    print (fuseki_query.get_answer(query))
     
 
 if __name__ == "__main__":
@@ -75,3 +75,7 @@ if __name__ == "__main__":
         
     main(client_url_tib, client_id_tib,
          client_secret_tib, query)
+    main (client_url_imp, client_id_imp,
+         client_secret_imp, query)
+    main(client_url_infai, client_id_infai,
+         client_secret_infai, query)

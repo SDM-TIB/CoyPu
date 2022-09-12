@@ -148,3 +148,136 @@ WHERE{
         ips:capacity ?capacity .
 }
 
+PREFIX wb: <http://worldbank.org/>
+
+Describe ?country
+
+where {
+?country a wb:AnnualIndicatorEntry;
+         wb:hasCountry <http://worldbank.org/Country/IND>
+
+} LIMIT 400
+
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+        filter(str(?country_code)="IND")
+    }
+
+
+SERVICE <https://query.wikidata.org/sparql>{
+
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                  wdt:P298 ?country_code_wiki;
+                 p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+           ps:P1082 ?population
+        bind(year(?time) as ?year_w)
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
+
+filter(?year_w=?year && ?country_code_wiki=?country_code)
+}order by ?country ?year
+limit 50
+
+
+
+
+SELECT ?countryLabel ?population (round(?population/?worldpopulation*1000)/10 AS ?percentage)
+WHERE {
+  ?country wdt:P31 wd:Q3624078;    # is a sovereign state
+           wdt:P1082 ?population.
+
+  { 
+    # subquery to determine ?worldpopulation
+    SELECT (sum(?population) AS ?worldpopulation)
+    WHERE { 
+      ?country wdt:P31 wd:Q3624078;    # is a sovereign state
+               wdt:P1082 ?population. 
+    }
+  }
+
+  SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
+ORDER BY desc(?population)
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+        filter(str(?country_code)="IND")
+    }
+
+{select ?year_w ?population 
+    where {
+        SERVICE <https://query.wikidata.org/sparql>{
+
+            ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+            ?p pq:P585 ?time;
+               ps:P1082 ?population
+            bind(year(?time) as ?year_w)
+           filter(str(?country_code_wiki)="IND")
+            SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+                } }}
+filter(?year_w=?year)
+}order by ?country ?year
+limit 100
+
+
+
