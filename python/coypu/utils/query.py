@@ -15,6 +15,13 @@ class Query:
     def get_answer(self, query, ret_format='text/csv'):
         pass
     
+    def set_headers(self, ret_format='text/csv'):
+        headers = {
+                'Content-Type': 'application/sparql-query',
+                'Accept': ret_format,  # text/html
+                'Authorization': self.auth}
+        return headers
+    
 
 class CMEMCQuery(Query):
     def __init__(self, url, id_or_user, pass_or_secret):
@@ -23,10 +30,7 @@ class CMEMCQuery(Query):
     @get_auth_os2
     def get_answer(self, query, ret_format='text/csv'):
         url = self.url + "/dataplatform/proxy/default/sparql"
-        headers = {
-                'Content-Type': 'application/sparql-query',
-                'Accept': 'text/csv',  # text/html
-                'Authorization': self.auth}
+        headers = self.set_headers(ret_format)
         
         response = requests.request("POST", url, headers=headers, data=query)
 
@@ -43,10 +47,7 @@ class FusekiQuery(Query):
     @get_auth_basic
     def get_answer(self, query, ret_format='text/csv'):
         url = self.url
-        headers = {
-                'Content-Type': 'application/sparql-query',
-                'Accept': ret_format,  # text/html
-                'Authorization': self.auth}
+        headers = self.set_headers(ret_format)
         response = requests.request("POST", url, headers=headers, data=query)
 
         if response.status_code == 200:
