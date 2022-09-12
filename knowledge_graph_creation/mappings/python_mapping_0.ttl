@@ -568,6 +568,12 @@
     rr:objectMap [ rr:template "{WikiData}" ]
   ];
 
+  # Map country code to wb:hasCountry
+  rr:predicateObjectMap [ 
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code 3}" ]
+  ];
+
   # Map the country name to DBpedia data
   rr:predicateObjectMap [ 
     rr:predicate owl:sameAs ;
