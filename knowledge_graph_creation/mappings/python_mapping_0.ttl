@@ -562,16 +562,16 @@
     rr:objectMap [ rr:template "http://worldbank.org/Country/{Country Code 2}" ]
   ];
 
+  # Map country code to wb:hasCountry
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs;
+    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code 3}" ]
+  ];
+
   # Map the special notes to WikiData data
   rr:predicateObjectMap [ 
     rr:predicate owl:sameAs ;
     rr:objectMap [ rr:template "{WikiData}" ]
-  ];
-
-  # Map country code to wb:hasCountry
-  rr:predicateObjectMap [ 
-    rr:predicate wb:hasCountry ;
-    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code 3}" ]
   ];
 
   # Map the country name to DBpedia data

@@ -46,11 +46,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -109,11 +109,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -172,11 +172,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -235,11 +235,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -298,11 +298,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -361,11 +361,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -424,11 +424,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -487,11 +487,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -550,11 +550,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -613,11 +613,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -676,11 +676,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -739,11 +739,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -802,11 +802,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -865,11 +865,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -928,11 +928,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -991,11 +991,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1054,11 +1054,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1117,11 +1117,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1180,11 +1180,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1243,11 +1243,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1306,11 +1306,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1369,11 +1369,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1432,11 +1432,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1495,11 +1495,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1558,11 +1558,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1621,11 +1621,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1684,11 +1684,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1747,11 +1747,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1810,11 +1810,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1873,11 +1873,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1936,11 +1936,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -1999,11 +1999,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2062,11 +2062,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2125,11 +2125,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2188,11 +2188,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2251,11 +2251,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2314,11 +2314,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2377,11 +2377,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2440,11 +2440,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2503,11 +2503,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2566,11 +2566,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2629,11 +2629,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2692,11 +2692,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2755,11 +2755,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2818,11 +2818,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2881,11 +2881,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -2944,11 +2944,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3007,11 +3007,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3070,11 +3070,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3133,11 +3133,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3196,11 +3196,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3259,11 +3259,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3322,11 +3322,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3385,11 +3385,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3448,11 +3448,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3511,11 +3511,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3574,11 +3574,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3637,11 +3637,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3700,11 +3700,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
@@ -3763,11 +3763,11 @@
     rr:predicate wb:hasIndicator ;
     rr:objectMap [rr:template "http://worldbank.org/Indicator/{Indicator Code}" ]
   ];
-
+  
   # Map country code to wb:hasCountry
   rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{Country Code}" ]
+    rr:predicate wb:hasCountry ;
+    rr:objectMap [rr:template "http://worldbank.org/Country/{Country Code}" ]
   ];
   
   # Map topic to wb:hasTopic
