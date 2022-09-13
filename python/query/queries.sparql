@@ -280,4 +280,59 @@ filter(?year_w=?year)
 limit 100
 
 
+## tech companies
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX psv: <http://www.wikidata.org/prop/statement/value/>
+ PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
 
+select ?cLabel ?countryLabel ?lat ?long {
+  ?c 
+     #wdt:P31/wdt:P279* wd:Q18388277 ;
+     p:P452/ps:P452/wdt:P279* wd:Q1326885 ; # electrical industy
+     wdt:P17 ?country . 
+     ?country p:P625/psv:P625 ?coordinate .
+     ?coordinate wikibase:geoLatitude ?lat ;
+                 wikibase:geoLongitude ?long .
+     #wdt:P1056 ?product
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+  }
+
+
+# Conflicts
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?iri ?hasName ?hasFatalities ?hasLocation ?hasActor ?hasLatitude ?hasLongitude ?hasIsoCode ?hasTimestamp
+FROM <https://data.coypu.org/>
+WHERE {
+    ?iri a coy:AcledEvent ;
+    rdfs:label ?hasName ;
+    coy:hasFatalities ?hasFatalities ;
+    coy:hasLocation ?hasLocation ;    
+    coy:hasActor ?hasActor ;    
+    coy:hasLatitude ?hasLatitude ;
+    coy:hasLongitude ?hasLongitude ;
+    coy:hasIsoCode ?hasIsoCode ;
+    coy:hasTimestamp ?hasTimestamp .
+    } LIMIT 100
+
+# hasLocation Problem
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT Distinct ?class 
+FROM <https://data.coypu.org/>
+WHERE {
+  ?class a owl:Class.
+  ?sub a ?class;
+       coy:hasLocation ?obj .
+  
+}Limit 10
