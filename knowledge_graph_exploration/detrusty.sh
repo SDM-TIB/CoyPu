@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###### collecting metadata
-docker exec -it detrusty bash -c 'create_rdfmts.py -s /DeTrusty/Config/endpoints.txt'
+# docker exec -it detrusty bash -c 'create_rdfmts.py -s /DeTrusty/Config/endpoints.txt'
 docker exec -it detrusty bash -c 'create_rdfmts.py -s /DeTrusty/Config/endpoints.json -j'
 docker exec -it detrusty restart_workers.sh 
 

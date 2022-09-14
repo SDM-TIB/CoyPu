@@ -336,3 +336,13 @@ WHERE {
        coy:hasLocation ?obj .
   
 }Limit 10
+
+
+#company size
+PREFIX coy: <https://schema.coypu.org/global#>
+
+select distinct ?company_size
+where {
+    ?company coy:hasLocation ?location;
+             coy:hasCompanySize ?company_size
+} limit 10

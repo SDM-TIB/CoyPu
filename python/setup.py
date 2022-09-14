@@ -17,7 +17,7 @@ test_requirements = ['pytest>=7', ]
 setup(
     author="Akhilesh Vyas",
     author_email='akh.vyas@gmail.com',
-    python_requires='>=3.10',
+    python_requires='>=3.9',
     classifiers=[
         'Development Status :: Unknown',
         'Intended Audience :: Developers',

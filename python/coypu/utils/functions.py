@@ -2,7 +2,8 @@ from random import random
 import pandas as pd
 import requests
 import base64
-
+import time
+import functools
 
 def replace(self, updated_file: str, replace: dict = {'\'': ''},
             header: bool = False, index=False):
@@ -31,6 +32,7 @@ def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
     del df
 
 def get_auth_os2(func):
+    @functools.wraps(func)
     def wrapper(self, query, ret_format='text/csv'):
         url = self.url + "/auth/realms/cmem/protocol/openid-connect/token"
         payload = 'grant_type=client_credentials&client_id={}&client_secret={}'\
@@ -49,8 +51,18 @@ def get_auth_os2(func):
     return wrapper
 
 def get_auth_basic(func):
+    @functools.wraps(func)
     def wrapper(self, query, ret_format='text/csv'):
         usr_pass = self.id_or_user + ':' + self.pass_or_secret
         self.auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
         return func(self, query, ret_format='text/csv')
+    return wrapper
+
+def timer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        time_pre = time.time()
+        ret = func(*args, **kwargs)
+        print('Total time taken by {} function: {}'.format(func.__name__,time.time()-time_pre))
+        return ret
     return wrapper

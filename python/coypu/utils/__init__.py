@@ -1,4 +1,7 @@
-# from .credentials import *
-# import coypu.utils.plots
-# import coypu.utils.sparql_query
-# import coypu.utils.functions
+"""coypu.utils subpackage for project"""
+
+__author__ = """Akhilesh Vyas"""
+__email__ = 'akh.vyas@gmail.com'
+__version__ = '0.1.0'
+
+

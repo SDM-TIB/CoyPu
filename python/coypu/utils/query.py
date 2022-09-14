@@ -1,6 +1,6 @@
 import requests
-from credentials import *
-from functions import *
+from .credentials import *
+from .functions import *
 import pandas as pd
 from io import StringIO
 print(__package__)
@@ -10,6 +10,7 @@ class Query:
         self.url = url
         self.id_or_user = id_or_user
         self.pass_or_secret = pass_or_secret
+        self.auth = None
     
     @get_auth
     def get_answer(self, query, ret_format='text/csv'):
@@ -18,8 +19,10 @@ class Query:
     def set_headers(self, ret_format='text/csv'):
         headers = {
                 'Content-Type': 'application/sparql-query',
-                'Accept': ret_format,  # text/html
-                'Authorization': self.auth}
+                'Accept': ret_format}  # text/html
+                
+        if self.auth:
+            headers['Authorization']= self.auth
         return headers
     
 
@@ -27,6 +30,7 @@ class CMEMCQuery(Query):
     def __init__(self, url, id_or_user, pass_or_secret):
         super().__init__(url, id_or_user, pass_or_secret)
     
+    @timer
     @get_auth_os2
     def get_answer(self, query, ret_format='text/csv'):
         url = self.url + "/dataplatform/proxy/default/sparql"
@@ -44,6 +48,7 @@ class FusekiQuery(Query):
     def __init__(self, url, id_or_user, pass_or_secret):
         super().__init__(url, id_or_user, pass_or_secret)
 
+    @timer
     @get_auth_basic
     def get_answer(self, query, ret_format='text/csv'):
         url = self.url
@@ -55,6 +60,26 @@ class FusekiQuery(Query):
             return pd.read_csv(StringIO(str(response.content, 'utf-8')))
         return None
 
+class FDQuery(Query):
+    def __init__(self, url, id_or_user=None, pass_or_secret=None):
+        super().__init__(url, id_or_user, pass_or_secret)
+    
+    def set_headers(self, ret_format='text/csv'):
+            headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                      }
+            return headers
+
+    @timer
+    def get_answer(self, query, ret_format='text/csv'):
+        url = self.url
+        headers = self.set_headers(ret_format)
+        response = requests.request("POST", url, headers=headers, data="query="+query)
+        print(response.text)
+        if response.status_code == 200:
+            print(response.text)
+            return pd.read_json(StringIO(str(response.content, 'utf-8')))
+        return None
 
 def main(client_url='', client_id='', client_secret='',
          query="""SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""):

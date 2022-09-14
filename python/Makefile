@@ -1,4 +1,4 @@
-.PHONY: clean clean-build clean-pyc clean-test coverage dist docs help install lint lint/flake8
+.PHONY: clean clean-build clean-pyc clean-test coverage dist docs help install lint lint/flake8 install-local
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -90,3 +90,6 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
+
+install-local: clean ## install the package to local directory site-packages
+	python setup.py develop
