@@ -74,7 +74,7 @@ class FDQuery(Query):
     def get_answer(self, query, ret_format='text/csv'):
         url = self.url
         headers = self.set_headers(ret_format)
-        response = requests.request("POST", url, headers=headers, data="query="+query)
+        response = requests.request("POST", url, headers=headers, data="""query="""+query)
         print(response.text)
         if response.status_code == 200:
             print(response.text)

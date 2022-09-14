@@ -77,13 +77,13 @@ limit 2000
 
 query_2 = prefixes + """select ?location ?location1 ?year ?topic ?indicator ?indicator_label ?indicator_note (avg(?value) as ?avg_value)
 where {
-?country a wb:AnnualIndicatorEntry;
-         wb:hasTopic ?topic;
-         wb:hasIndicator ?indicator;
-         wb:hasCountry ?location;
-         owl:hasValue ?value;
-         time:year ?year.
-optional {?indicator rdfs:label ?indicator_label}
+    ?country a wb:AnnualIndicatorEntry;
+            wb:hasTopic ?topic;
+            wb:hasIndicator ?indicator;
+            wb:hasCountry ?location;
+            owl:hasValue ?value;
+            time:year ?year.
+            optional {?indicator rdfs:label ?indicator_label}
 optional {?indicator skos:note  ?indicator_note }
 bind(replace(str(?location),"http://worldbank.org/Country/", "") as ?location1 )
 filter(?year=2021 && ?location=<http://worldbank.org/Country/DEU>)
