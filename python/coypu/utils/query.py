@@ -71,14 +71,23 @@ class FDQuery(Query):
             return headers
 
     @timer
-    def get_answer(self, query, ret_format='text/csv'):
+    def get_answer(self, query, ret_format='text/csv', sparql1_1=False):
         url = self.url
         headers = self.set_headers(ret_format)
-        response = requests.request("POST", url, headers=headers, data="""query="""+query)
-        print(response.text)
+        if sparql1_1==True:
+            # print ("query="+query+"&sparql1_1=True")
+            response = requests.request("POST", url, headers=headers, data="query="+query+"&sparql1_1=True")
+        else:
+            response = requests.request("POST", url, headers=headers, data="""query="""+query)
+        # print(response.text)
         if response.status_code == 200:
-            print(response.text)
-            return pd.read_json(StringIO(str(response.content, 'utf-8')))
+            response = response.json()
+            # return pd.DataFrame.from_dict(response)
+            # print(response)
+            try:
+                return pd.json_normalize(response['results']['bindings'])
+            except:
+                print('No results found')
         return None
 
 def main(client_url='', client_id='', client_secret='',

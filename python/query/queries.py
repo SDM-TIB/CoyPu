@@ -22,6 +22,50 @@ SELECT * WHERE{
     ?subject ?predicate ?object
 }LIMIT 10
 """
+
+query_test = prefixes + """
+SELECT * WHERE{ 
+    ?subject ?predicate ?object
+}
+LIMIT 10
+"""
+
+query_test_public_service = prefixes +"""
+SELECT * WHERE { 
+SERVICE <https://query.wikidata.org/sparql> {
+    ?subject ?predicate ?object
+}LIMIT 10
+}"""
+
+query_test_private_service = prefixes +"""
+SELECT * WHERE 
+{ SERVICE <https://implisense.coypu.org/dataplatform/proxy/default/sparql> 
+ {<https://schema.coypu.org/acled/8909747> a ?o
+}
+}"""
+
+query_test_private_service_2 = prefixes +"""
+SELECT Distinct * WHERE{ 
+SERVICE <https://implisense.coypu.org/dataplatform/proxy/default/sparql> {
+    <https://schema.coypu.org/acled/8909747> a ?o
+}
+SERVICE <http://coypu-fuseki.aksw.org/country/sparql> {
+    <https://data.coypu.org/country/MAR> a ?o1
+}
+}"""
+
+query_test_private_public = prefixes +"""
+SELECT Distinct * WHERE{ 
+SERVICE <https://implisense.coypu.org/dataplatform/proxy/default/sparql> {
+    <https://schema.coypu.org/acled/8909747> a ?o
+}
+
+SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql> {
+     <http://worldbank.org/Country/DEU> a ?o1
+}
+}"""
+
+
  
 query_1_desc = "Query1: percentage of fatalities with respect to country population in a year"
 query_1 = prefixes + """
@@ -43,14 +87,36 @@ WHERE {
         ?p pq:P585 ?time;
                ps:P1082 ?population.
         bind(year(?time) as ?year_w)
-        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
-    filter(?year_w=?year && ?country_code_wiki=?isoCode)    
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}  
     }
+    filter(?year_w=?year && ?country_code_wiki=?isoCode)  
     
 
 }group by ?isoCode ?year 
 order by desc (?total_fatalities)
 LIMIT 10
+"""
+
+query_1_fdq = prefixes + """
+SELECT ?isoCode ?timestamp ?fatalities ?population
+WHERE {
+    SERVICE <https://implisense.coypu.org/dataplatform/proxy/default/sparql>{
+    <https://schema.coypu.org/acled/8823191> a coy:AcledEvent ;
+    coy:hasIsoCode ?isoCode ;
+    coy:hasTimestamp ?timestamp;
+    coy:hasFatalities ?fatalities.
+    }
+    SERVICE <https://query.wikidata.org/sparql>
+    {
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 'IND';
+                     p:P1082 ?p.
+        ?p pq:P585 ?time;
+               ps:P1082 ?population.
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+    }
+    
+}
 """
 
 query_2_desc = "Query 2: Germany WB indicators for year 2021"
@@ -75,20 +141,5 @@ order by ?country ?isoCode ?year
 limit 2000
 """
 
-query_2 = prefixes + """select ?location ?location1 ?year ?topic ?indicator ?indicator_label ?indicator_note (avg(?value) as ?avg_value)
-where {
-    ?country a wb:AnnualIndicatorEntry;
-            wb:hasTopic ?topic;
-            wb:hasIndicator ?indicator;
-            wb:hasCountry ?location;
-            owl:hasValue ?value;
-            time:year ?year.
-            optional {?indicator rdfs:label ?indicator_label}
-optional {?indicator skos:note  ?indicator_note }
-bind(replace(str(?location),"http://worldbank.org/Country/", "") as ?location1 )
-filter(?year=2021 && ?location=<http://worldbank.org/Country/DEU>)
-}group by ?year ?location ?location1 ?topic ?indicator ?indicator_label ?indicator_note
-order by ?location ?location1 ?year
-limit 2000
-"""
+
 

@@ -9,6 +9,9 @@ endpoints.json
 endpoints.txt
 generated_rdf_graph_data/*.ttl
 query_results/*.json
+nohup.out
+rdfmts.json.old
+rdfmts.json
 
 # private data files
 credentials.py
