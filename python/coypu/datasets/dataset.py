@@ -49,14 +49,15 @@ class FastArrayProcessing():
                  (jb.delayed(self.func)(value) for value in tqdm(self.array))
         return result
     
-    def do_batch_processing(self):
-        def proc_batch(batch):
+    def proc_batch(self, batch):
             return [self.func(value) for value in batch]
+        
+    def do_batch_processing(self):
         file_len = len(self.array)
         batch_size = round(file_len/self.n_workers)
         batches = [self.array[ix:ix+batch_size] for ix in tqdm(range(0, file_len, batch_size))]
         batch_outputs = jb.Parallel(self.n_workers, backend="multiprocessing")\
-                       (jb.delayed(proc_batch)(batch) for batch in tqdm(batches))
+                       (jb.delayed(self.proc_batch)(batch) for batch in tqdm(batches))
         return [value for batch_output in batch_outputs for value in batch_output]
     
     def do_concurrent(self):
