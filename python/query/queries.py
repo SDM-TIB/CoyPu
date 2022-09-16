@@ -93,7 +93,6 @@ WHERE {
     
 
 }group by ?isoCode ?year 
-order by desc (?total_fatalities)
 LIMIT 10
 """
 

@@ -346,3 +346,178 @@ where {
     ?company coy:hasLocation ?location;
              coy:hasCompanySize ?company_size
 } limit 10
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+select  ?country_code ?year ?value ?no_of_disaster_events
+where {
+
+service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
+?indicator a wb:AnnualIndicatorEntry;
+           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+           wb:hasCountry ?country;
+           owl:hasValue ?value;        
+           time:year ?year.
+           
+bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+filter(?country_code='CHN' )
+}
+    {
+    select ?year_dis (count(?disaster) as ?no_of_disaster_events)
+    where { ########## Please add Implisense service ################
+    ?disaster a coy:Disaster;
+                    coy:hasLocation ?country_dis;
+                    coy:hasTimestamp ?timestamp.
+                    
+    bind(year(?timestamp) as ?year_dis)
+    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+    filter(?country_dis_code='CHN')        
+    }group by ?country_dis_code ?year_dis
+    }
+    filter(?year_dis=?year)
+}
+order by ?year
+
+############################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+select ?country_code ?year ?value ?no_of_disaster_events
+where {
+
+service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
+?indicator a wb:AnnualIndicatorEntry;
+           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+           wb:hasCountry ?country;
+           owl:hasValue ?value;        
+           time:year ?year.
+           
+bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+}
+ 
+    {
+    select ?country_dis_code ?year_dis (count(?disaster) as ?no_of_disaster_events)
+    where {   ########## Please add Implisense service below################
+    ?disaster a coy:Disaster;
+                    coy:hasLocation ?country_dis;
+                    coy:hasTimestamp ?timestamp.
+                    
+    bind(year(?timestamp) as ?year_dis)
+    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+    }group by ?country_dis_code ?year_dis
+    }
+    filter(?country_code=?country_dis_code && ?year_dis=?year)
+}
+order by ?country_code ?year
+
+###########################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+            filter(str(?country_code)="DEU")
+    }
+
+{
+select ?year_w ?population 
+    where {SERVICE <https://query.wikidata.org/sparql>{
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+               ps:P1082 ?population
+        bind(year(?time) as ?year_w)
+        filter(str(?country_code_wiki)="DEU")
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+            }} 
+}
+filter(?year_w=?year)
+}order by ?country ?year
+limit 100
+
+
+############################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?isoCode ?year ((sum(?fatalities_int)/avg(?population))*100 as ?per_fatalities) (count(?iri) as ?no_of_acled_events) 
+WHERE {
+    ########## Please add Implisense service below################
+    ?iri a coy:AcledEvent ;
+    coy:hasIsoCode ?isoCode ;
+    coy:hasTimestamp ?timestamp;
+    coy:hasFatalities ?fatalities.
+    bind(year(?timestamp) as ?year)
+    bind (xsd:integer(?fatalities) as ?fatalities_int)
+    filter(?isoCode='SYR')
+    
+    SERVICE <https://query.wikidata.org/sparql>
+    {
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+               ps:P1082 ?population.
+        bind(year(?time) as ?year_w)
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".} 
+    	filter(?country_code_wiki='SYR' && ?year_w=?year)
+    }
+}group by ?isoCode ?year
+
+
+
