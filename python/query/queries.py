@@ -101,8 +101,8 @@ query_1_fdq = prefixes + """
 SELECT ?isoCode ?timestamp ?fatalities ?population
 WHERE {
     SERVICE <https://implisense.coypu.org/dataplatform/proxy/default/sparql>{
-    <https://schema.coypu.org/acled/8823191> a coy:AcledEvent ;
-    coy:hasIsoCode ?isoCode ;
+    <https://schema.coypu.org/acled/8823191> a coy:AcledEvent;
+    coy:hasIsoCode ?isoCode;
     coy:hasTimestamp ?timestamp;
     coy:hasFatalities ?fatalities.
     }
@@ -115,7 +115,6 @@ WHERE {
                ps:P1082 ?population.
         SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
     }
-    
 }
 """
 

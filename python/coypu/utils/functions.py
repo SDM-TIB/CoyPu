@@ -66,3 +66,6 @@ def timer(func):
         print('Total time taken by {} function: {}'.format(func.__name__,time.time()-time_pre))
         return ret
     return wrapper
+
+def add_text(text, value='text: '):
+    return value + text
