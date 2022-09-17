@@ -13,7 +13,7 @@ class Query:
         self.auth = None
     
     @get_auth
-    def get_answer(self, query, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, ret_format='text/csv'):
         pass
     
     def set_headers(self, ret_format='text/csv'):
@@ -32,15 +32,16 @@ class CMEMCQuery(Query):
     
     @timer
     @get_auth_os2
-    def get_answer(self, query, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, ret_format='text/csv'):
         url = self.url + "/dataplatform/proxy/default/sparql"
         headers = self.set_headers(ret_format)
         
         response = requests.request("POST", url, headers=headers, data=query)
 
         if response.status_code == 200:
-            # print(response.text)
+            print("Passed Query: {}".format(query_desc))
             return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+        print("Failed Query: {} Error:{}".format(query_desc, response.content))
         return None
 
 
@@ -50,14 +51,15 @@ class FusekiQuery(Query):
 
     @timer
     @get_auth_basic
-    def get_answer(self, query, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, ret_format='text/csv'):
         url = self.url
         headers = self.set_headers(ret_format)
         response = requests.request("POST", url, headers=headers, data=query)
 
         if response.status_code == 200:
-            # print(response.text)
+            print("Passed Query: {}".format(query_desc))
             return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+        print("Failed Query: {} Error:{}".format(query_desc, response.content))
         return None
 
 class FDQuery(Query):
@@ -71,7 +73,7 @@ class FDQuery(Query):
             return headers
 
     @timer
-    def get_answer(self, query, ret_format='text/csv', sparql1_1=False):
+    def get_answer(self, query, query_desc, ret_format='text/csv', sparql1_1=False):
         url = self.url
         headers = self.set_headers(ret_format)
         if sparql1_1==True:
@@ -85,9 +87,10 @@ class FDQuery(Query):
             # return pd.DataFrame.from_dict(response)
             # print(response)
             try:
+                print("Passed Query: {}".format(query_desc))
                 return pd.json_normalize(response['results']['bindings'])
             except:
-                print('No results found')
+                print("Failed Query: {} {} Error:{}".format(query_desc, response.content))
         return None
 
 def main(client_url='', client_id='', client_secret='',

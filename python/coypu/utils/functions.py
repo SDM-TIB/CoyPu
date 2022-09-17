@@ -33,7 +33,7 @@ def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
 
 def get_auth_os2(func):
     @functools.wraps(func)
-    def wrapper(self, query, ret_format='text/csv'):
+    def wrapper(self, *args, **kwargs):
         url = self.url + "/auth/realms/cmem/protocol/openid-connect/token"
         payload = 'grant_type=client_credentials&client_id={}&client_secret={}'\
             .format(self.id_or_user, self.pass_or_secret)
@@ -47,15 +47,15 @@ def get_auth_os2(func):
         if response.status_code == 200:
             self.auth = 'Bearer ' + response.json()['access_token']
         
-        return func(self, query, ret_format)
+        return func(self, *args, **kwargs)
     return wrapper
 
 def get_auth_basic(func):
     @functools.wraps(func)
-    def wrapper(self, query, ret_format='text/csv'):
+    def wrapper(self, *args, **kwargs):
         usr_pass = self.id_or_user + ':' + self.pass_or_secret
         self.auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
-        return func(self, query, ret_format='text/csv')
+        return func(self, *args, **kwargs)
     return wrapper
 
 def timer(func):
@@ -67,5 +67,3 @@ def timer(func):
         return ret
     return wrapper
 
-def add_text(text, value='text: '):
-    return value + text

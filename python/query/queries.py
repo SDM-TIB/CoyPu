@@ -14,6 +14,7 @@ PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
 """
 
 query_0_desc = "Query0: Test query"
@@ -138,6 +139,38 @@ group by ?country ?year ?isoCode ?topic ?indicator ?indicator_label ?indicator_n
 order by ?country ?isoCode ?year
 limit 2000
 """
+
+query_3_desc = "Gdp per captita for countries - WB and Wikidata"
+query_3 = prefixes + """select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+    }
+
+{
+select ?country_code_wiki ?year_w ?population 
+    where {SERVICE <https://query.wikidata.org/sparql>{
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+               ps:P1082 ?population.
+        bind(year(?time) as ?year_w)
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+            }} 
+}
+filter(?year_w=?year && ?country_code_wiki=?country_code)
+}order by ?country ?year
+limit 100
+"""
+
 
 
 
