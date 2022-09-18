@@ -7,111 +7,84 @@ print(__package__)
 from os.path import join
 
 class Query:
-    def __init__(self, url, id_or_user, pass_or_secret):
+    def __init__(self, url, id_or_user=None, pass_or_secret=None, auth_type:str=None, is_fdq=False):
         self.url = url
-        self.id_or_user = id_or_user
-        self.pass_or_secret = pass_or_secret
-        self.auth = None
-    
-    @get_auth
-    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
-        pass
-    
-    def set_headers(self, ret_format='text/csv'):
-        headers = {
-                'Content-Type': 'application/sparql-query',
-                'Accept': ret_format}  # text/html
-                
-        if self.auth:
-            headers['Authorization']= self.auth
-        return headers
-    
-
-class CMEMCQuery(Query):
-    def __init__(self, url, id_or_user, pass_or_secret):
-        super().__init__(url, id_or_user, pass_or_secret)
-    
-    @timer
-    @get_auth_os2
-    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
-        url = self.url + "/dataplatform/proxy/default/sparql"
-        headers = self.set_headers(ret_format)
-        
-        response = requests.request("POST", url, headers=headers, data=query, stream=True)
-
-        if response.status_code == 200:
-            print("Passed Query: {}".format(query_desc))
-            filename = '_'.join(query_desc.split(' '))
-            with open(join(save_path, filename+'.raw'), 'wb') as fd:
-                for chunk in response.iter_content(chunk_size=128):
-                    fd.write(chunk)
-            # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
-            return True
-        print("Failed Query: {} Error:{}".format(query_desc, response.content))
-        return False
-
-
-class FusekiQuery(Query):
-    def __init__(self, url, id_or_user, pass_or_secret):
-        super().__init__(url, id_or_user, pass_or_secret)
-
-    @timer
-    @get_auth_basic
-    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
-        url = self.url
-        headers = self.set_headers(ret_format)
-        response = requests.request("POST", url, headers=headers, data=query, stream=True)
-
-        if response.status_code == 200:
-            print("Passed Query: {}".format(query_desc))
-            filename = '_'.join(query_desc.split(' '))
-            with open(join(save_path, filename+'.csv'), 'wb') as fd:
-                for chunk in response.iter_content(chunk_size=128):
-                    fd.write(chunk)
-            # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
-            return True
-        print("Failed Query: {} Error:{}".format(query_desc, response.content))
-        return False
-
-class FDQuery(Query):
-    def __init__(self, url, id_or_user=None, pass_or_secret=None):
-        super().__init__(url, id_or_user, pass_or_secret)
-    
-    def set_headers(self, ret_format='text/csv'):
+        if not is_fdq:
+            self.id_or_user = id_or_user
+            self.pass_or_secret = pass_or_secret
+        self.is_fdq = is_fdq
+        self.auth_type = auth_type
+        self.__connect_to()
+            
+    def __set_headers(self, accept_type='text/csv'):
+        if self.auth_type:
             headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                      }
-            return headers
-
-    @timer
-    def get_answer(self, query, query_desc, save_path, ret_format='text/csv', sparql1_1=False):
-        url = self.url
-        headers = self.set_headers(ret_format)
-        if sparql1_1==True:
-            response = requests.request("POST", url, headers=headers, data="query="+query+"&sparql1_1=True")
+                'Content-Type': 'application/sparql-query',
+                'Accept': accept_type,
+                'Authorization': self.auth}  # text/html
         else:
-            response = requests.request("POST", url, headers=headers, data="""query="""+query)
+            headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        return headers
+
+    @auth_oauth
+    def __set_req_params_os2(self, accept_type='text/csv'):
+        self.url = self.url + "/dataplatform/proxy/default/sparql"
+        self.headers = self.__set_headers(accept_type)
         
-        if response.status_code == 200:
-            print("Passed Query: {}".format(query_desc))
-            filename = '_'.join(query_desc.split(' '))
-            with open(join(save_path, filename+'.json'), 'wb') as fd:
-                for chunk in response.iter_content(chunk_size=128):
-                    fd.write(chunk)
-            return True
-        print("Failed Query: {} Error:{}".format(query_desc, response.content))
-        return False
+    @auth_basic
+    def __set_req_params_basic(self, accept_type='text/csv'):
+        self.headers = self.__set_headers(accept_type)
+    
+    def __set_req_params(self, accept_type='text/json'):
+        self.headers = self.__set_headers(accept_type)
         
+    def __connect_to(self, accept_type='text/csv'):
+        if self.auth_type=='oauth':
+            self.__set_req_params_os2()
+        elif self.auth_type=='basic':
+            self.__set_req_params_basic()
+        elif self.is_fdq:
+            self.__set_req_params()
+        else:
+            raise ValueError('wrong parameters or auth_type (oauth, basic ) is missing !!')
+    
+    @timer
+    def post_query(self, query, is_service=False):
+        try: 
+            if self.is_fdq and is_service:
+                response = requests.request("POST", self.url, headers=self.headers, data="query="+query+"&sparql1_1=True")
+            elif self.is_fdq:
+                response = requests.request("POST", self.url, headers=self.headers, data="""query="""+query)
+            else:
+                response = requests.request("POST", self.url, headers=self.headers, data=query, stream=True)
+            
+            if response.status_code == 200:
+                print("Passed Query Description: {}".format(response.status_code))
+                self.response = response
+            else:
+                print("Failed Query: {}".format(response.content))
+        except Exception as e:
+            print("Failed Query: {}".format(str(e)))
+            
+    @timer
+    def to_save(self, save_path, filename=None):
+        filename = '_'.join(self.filename.split(' '))
+        with open(join(save_path, filename+'.raw'), 'wb') as fd:
+            for chunk in self.response.iter_content(chunk_size=128):
+                fd.write(chunk)
+        # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+        
+
 
 def main(client_url='', client_id='', client_secret='',
          query="""SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""):
     
-    cmemc_query = CMEMCQuery(client_url, client_id, client_secret)
-    print(cmemc_query.get_answer(query))
+    cmemc_query = Query(client_url, client_id, client_secret)
+    print(cmemc_query.get_response(query))
     
     
-#    fuseki_query = FusekiQuery(fuseki_endpoint, fuseki_user_infai, fuseki_pw_infai)
-#    print (fuseki_query.get_answer(query))
+#    fuseki_query = Query(fuseki_endpoint, fuseki_user_infai, fuseki_pw_infai)
+#    print (fuseki_query.get_response(query))
     
 
 if __name__ == "__main__":

@@ -15,11 +15,6 @@ def replace(self, updated_file: str, replace: dict = {'\'': ''},
     del df
 
 
-def get_auth(func):
-    def wrapper(self,  query, ret_format):
-        return func(self,  query, ret_format)
-    return wrapper
-
 def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
                     chunksize: int = 100000, random_state: int = 1,
                     index: bool = False):
@@ -31,12 +26,12 @@ def get_sample_data(self, updated_file: str, sample_rows: int = 20000,
     df.to_csv(updated_file, index=index)
     del df
 
-def get_auth_os2(func):
+def auth_oauth(func):
     @functools.wraps(func)
-    def wrapper(self, *args, **kwargs):
-        url = self.url + "/auth/realms/cmem/protocol/openid-connect/token"
+    def wrapper(*args, **kwargs):
+        url = args[0].url + "/auth/realms/cmem/protocol/openid-connect/token"
         payload = 'grant_type=client_credentials&client_id={}&client_secret={}'\
-            .format(self.id_or_user, self.pass_or_secret)
+            .format(args[0].id_or_user, args[0].pass_or_secret)
 
         headers = {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -45,12 +40,12 @@ def get_auth_os2(func):
         response = requests.request("POST", url, headers=headers, data=payload)
 
         if response.status_code == 200:
-            self.auth = 'Bearer ' + response.json()['access_token']
+            args[0].auth = 'Bearer ' + response.json()['access_token']
         
-        return func(self, *args, **kwargs)
+        return func(*args, **kwargs)
     return wrapper
 
-def get_auth_basic(func):
+def auth_basic(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         usr_pass = args[0].id_or_user + ':' + args[0].pass_or_secret
