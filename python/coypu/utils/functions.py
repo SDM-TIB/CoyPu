@@ -52,10 +52,10 @@ def get_auth_os2(func):
 
 def get_auth_basic(func):
     @functools.wraps(func)
-    def wrapper(self, *args, **kwargs):
-        usr_pass = self.id_or_user + ':' + self.pass_or_secret
-        self.auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
-        return func(self, *args, **kwargs)
+    def wrapper(*args, **kwargs):
+        usr_pass = args[0].id_or_user + ':' + args[0].pass_or_secret
+        args[0].auth =  "Basic {}".format(base64.b64encode(usr_pass.encode()).decode())
+        return func(*args, **kwargs)
     return wrapper
 
 def timer(func):

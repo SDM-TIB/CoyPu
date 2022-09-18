@@ -1,4 +1,4 @@
-prefixes = """PREFIX coy: <https://schema.coypu.org/global#>
+prefixes = """DONT_ACCEPT_BLANKLINE
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -34,7 +34,7 @@ LIMIT 10
 query_test_public_service = prefixes +"""
 SELECT * WHERE { 
 SERVICE <https://query.wikidata.org/sparql> {
-    ?subject ?predicate ?object
+    ?subject rdf:type ?object
 }LIMIT 10
 }"""
 
@@ -91,12 +91,11 @@ WHERE {
         SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}  
     }
     filter(?year_w=?year && ?country_code_wiki=?isoCode)  
-    
-
 }group by ?isoCode ?year 
 LIMIT 10
 """
 
+query_1_fdq_desc = 'Acled event fatalities and population'
 query_1_fdq = prefixes + """
 SELECT ?isoCode ?timestamp ?fatalities ?population
 WHERE {
@@ -141,7 +140,7 @@ limit 2000
 """
 
 query_3_desc = "Gdp per captita for countries - WB and Wikidata"
-query_3 = prefixes + """select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+query_3 = prefixes + """select ?country ?year ?value ?population (?value/?population as ?gdp_per_capita)
 where {
 
     SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
@@ -150,7 +149,8 @@ where {
                        wb:hasCountry ?country;
                        owl:hasValue ?value;        
                        time:year ?year.
-            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+            filter(?year > 2018) 
     }
 
 {
@@ -163,12 +163,12 @@ select ?country_code_wiki ?year_w ?population
         ?p pq:P585 ?time;
                ps:P1082 ?population.
         bind(year(?time) as ?year_w)
+        filter(?year_w > 2018)
         SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
             }} 
 }
 filter(?year_w=?year && ?country_code_wiki=?country_code)
 }order by ?country ?year
-limit 100
 """
 
 

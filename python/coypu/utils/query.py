@@ -4,6 +4,7 @@ from .functions import *
 import pandas as pd
 from io import StringIO
 print(__package__)
+from os.path import join
 
 class Query:
     def __init__(self, url, id_or_user, pass_or_secret):
@@ -13,7 +14,7 @@ class Query:
         self.auth = None
     
     @get_auth
-    def get_answer(self, query, query_desc, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
         pass
     
     def set_headers(self, ret_format='text/csv'):
@@ -32,17 +33,22 @@ class CMEMCQuery(Query):
     
     @timer
     @get_auth_os2
-    def get_answer(self, query, query_desc, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
         url = self.url + "/dataplatform/proxy/default/sparql"
         headers = self.set_headers(ret_format)
         
-        response = requests.request("POST", url, headers=headers, data=query)
+        response = requests.request("POST", url, headers=headers, data=query, stream=True)
 
         if response.status_code == 200:
             print("Passed Query: {}".format(query_desc))
-            return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+            filename = '_'.join(query_desc.split(' '))
+            with open(join(save_path, filename+'.raw'), 'wb') as fd:
+                for chunk in response.iter_content(chunk_size=128):
+                    fd.write(chunk)
+            # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+            return True
         print("Failed Query: {} Error:{}".format(query_desc, response.content))
-        return None
+        return False
 
 
 class FusekiQuery(Query):
@@ -51,16 +57,21 @@ class FusekiQuery(Query):
 
     @timer
     @get_auth_basic
-    def get_answer(self, query, query_desc, ret_format='text/csv'):
+    def get_answer(self, query, query_desc, save_path, ret_format='text/csv'):
         url = self.url
         headers = self.set_headers(ret_format)
-        response = requests.request("POST", url, headers=headers, data=query)
+        response = requests.request("POST", url, headers=headers, data=query, stream=True)
 
         if response.status_code == 200:
             print("Passed Query: {}".format(query_desc))
-            return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+            filename = '_'.join(query_desc.split(' '))
+            with open(join(save_path, filename+'.csv'), 'wb') as fd:
+                for chunk in response.iter_content(chunk_size=128):
+                    fd.write(chunk)
+            # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
+            return True
         print("Failed Query: {} Error:{}".format(query_desc, response.content))
-        return None
+        return False
 
 class FDQuery(Query):
     def __init__(self, url, id_or_user=None, pass_or_secret=None):
@@ -73,25 +84,24 @@ class FDQuery(Query):
             return headers
 
     @timer
-    def get_answer(self, query, query_desc, ret_format='text/csv', sparql1_1=False):
+    def get_answer(self, query, query_desc, save_path, ret_format='text/csv', sparql1_1=False):
         url = self.url
         headers = self.set_headers(ret_format)
         if sparql1_1==True:
-            # print ("query="+query+"&sparql1_1=True")
             response = requests.request("POST", url, headers=headers, data="query="+query+"&sparql1_1=True")
         else:
             response = requests.request("POST", url, headers=headers, data="""query="""+query)
-        # print(response.text)
+        
         if response.status_code == 200:
-            response = response.json()
-            # return pd.DataFrame.from_dict(response)
-            # print(response)
-            try:
-                print("Passed Query: {}".format(query_desc))
-                return pd.json_normalize(response['results']['bindings'])
-            except:
-                print("Failed Query: {} {} Error:{}".format(query_desc, response.content))
-        return None
+            print("Passed Query: {}".format(query_desc))
+            filename = '_'.join(query_desc.split(' '))
+            with open(join(save_path, filename+'.json'), 'wb') as fd:
+                for chunk in response.iter_content(chunk_size=128):
+                    fd.write(chunk)
+            return True
+        print("Failed Query: {} Error:{}".format(query_desc, response.content))
+        return False
+        
 
 def main(client_url='', client_id='', client_secret='',
          query="""SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""):
