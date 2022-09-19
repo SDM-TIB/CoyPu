@@ -24,6 +24,9 @@ class Dataset():
 
     def print_sample(self, *args, **kwargs):
         pass
+    
+    def upload(self, *args, **kwargs):
+        pass
 
 
 class FastArrayProcessing():
