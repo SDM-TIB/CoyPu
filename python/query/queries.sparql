@@ -521,3 +521,41 @@ WHERE {
 
 
 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX wb: <http://worldbank.org/> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+
+SELECT Distinct count(?publisher) as ?c_publisher
+{
+  ?indicator rdf:type wb:Indicator;
+             dcterms:publisher ?publisher.
+ }
+
+
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX wb: <http://worldbank.org/> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+
+SELECT Distinct count(?indicator )
+{
+  ?indicator rdf:type wb:Indicator.
+    
+  FILTER NOT EXISTS { ?indicator dcterms:publisher ?publisher}  
+
+}
+
+
+GDP: NY.GDP.MKTP.CD
+GNE: NE.DAB.TOTL.CD
+GDP_PER_CAPITA: NY.GDP.PCAP.CN
+HCI: HD.HCI.OVRL
+GINI: SI.POV.GINI
+Industry(% GDP): NV.IND.TOTL.ZS
