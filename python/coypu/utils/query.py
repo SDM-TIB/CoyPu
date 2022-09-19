@@ -5,6 +5,7 @@ import pandas as pd
 from io import StringIO
 print(__package__)
 from os.path import join
+from coypu.datasets import DBSQL
 
 class Query:
     def __init__(self, url, id_or_user=None, pass_or_secret=None, auth_type:str=None, is_fdq=False):
@@ -74,7 +75,14 @@ class Query:
                 fd.write(chunk)
         # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
         
-
+    @timer
+    def df_to_db(self, df:pd.DataFrame, db:DBSQL, table_name, file_path):
+        db.df_to_sql(df, table_name)
+        
+    @timer
+    def read_query_as_df(self, query, db:DBSQL):
+        return db.read_sql_as_df(query)
+        
 
 def main(client_url='', client_id='', client_secret='',
          query="""SELECT DISTINCT ?s ?o WHERE{?s a ?o.} LIMIT 10"""):

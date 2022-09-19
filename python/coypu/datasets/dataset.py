@@ -2,6 +2,9 @@ import multiprocessing as mp
 import joblib as jb
 from tqdm import tqdm
 from tqdm.contrib.concurrent import process_map
+from sqlalchemy import create_engine
+from sqlalchemy import engine as eng
+import pandas as pd
 
 class Dataset():
     """Class for Dataset
@@ -66,7 +69,39 @@ class FastArrayProcessing():
     def do_concurrent(self):
         batch_size = round(len(self.array)/self.n_workers)
         return process_map(self.func, self.array, max_workers=self.n_workers, chunksize=batch_size)
+    
 
+class DBSQL():
+    def __init__(self, host, port, uname, pwd, dbname):
+        self._host = host
+        self._port = port
+        self._uname = uname
+        self._pwd = pwd
+        self._dbname = dbname
+        print ('Create object with keyword of python')
+        
+    def __enter__(self):
+        engine = create_engine(
+        "mysql+pymysql://{user}:{pw}@{hostname}:{portno}/{db}".format(
+            hostname=self._host, db=self._dbname, user=self._uname, pw=self._pwd, portno=self._port
+        ),)
+        self.dbcon = engine.connect()
+        return self
+    
+    def get_mysql_con(self):
+        return self.dbcon
+        
+    def df_to_sql(self, df:pd.DataFrame, table_name=None):
+        df.to_sql(table_name, con=self.dbcon, index=False, if_exists="fail")
+        
+    def read_sql_as_df(self, query):
+        return pd.read_sql(query, self.dbcon)
+    
+    def __exit__(self, type, value, traceback):
+        if all((type, value, traceback)):
+            raise (type, value, traceback)
+        self.dbcon.close()
+        return True
 
 def main():
     pass
