@@ -69,7 +69,7 @@ class Query:
             
     @timer
     def to_save(self, save_path, filename=None, ext='.csv'):
-        filename = '_'.join(self.filename.split(' '))
+        filename = '_'.join(filename.split(' '))
         with open(join(save_path, filename+ext), 'wb') as fd:
             for chunk in self.response.iter_content(chunk_size=128):
                 fd.write(chunk)
@@ -80,7 +80,7 @@ class Query:
         db.df_to_sql(df, table_name)
         
     @timer
-    def read_query_as_df(self, query, db:DBSQL):
+    def read_query_from_db_as_df(self, query, db:DBSQL):
         return db.read_sql_as_df(query)
         
 
