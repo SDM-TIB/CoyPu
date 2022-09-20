@@ -15,6 +15,8 @@ PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX wb: <http://worldbank.org/>
 PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 """
 
 query_0_desc = "Query0: Test query"
@@ -128,10 +130,11 @@ where {
          wb:hasCountry ?country;
          owl:hasValue ?value;        
          time:year ?year.
+?country rdfs:label ?country_name;
+                     dc:identifier ?iso_code;
+                     dbo:region ?region.
 optional {?indicator rdfs:label ?indicator_label}
 optional {?indicator skos:note  ?indicator_note }
-
-bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?isoCode )
          
 filter(?year=2021 && ?country=<http://worldbank.org/Country/DEU>)
 }
@@ -150,7 +153,9 @@ where {
                        wb:hasCountry ?country;
                        owl:hasValue ?value;        
                        time:year ?year.
-            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+            ?country rdfs:label ?country_name;
+                     dc:identifier ?country_code;
+                     dbo:region ?region.
             filter(?year > 2018) 
     }
 
@@ -177,28 +182,29 @@ query_4 = """select  ?country_code ?year ?value ?no_of_disaster_events
 where {
 
 service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
-?indicator a wb:AnnualIndicatorEntry;
-           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
-           wb:hasCountry ?country;
-           owl:hasValue ?value;        
-           time:year ?year.
-           
-bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
-filter(?country_code='CHN' )
+        ?indicator a wb:AnnualIndicatorEntry;
+                wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+                wb:hasCountry ?country;
+                owl:hasValue ?value;        
+                time:year ?year.
+        ?country rdfs:label ?country_name;
+                dc:identifier ?country_code;
+                dbo:region ?region.
+        filter(?country_code='CHN' )
 }
-    {
-    select ?year_dis (count(?disaster) as ?no_of_disaster_events)
-    where { ########## Please add Implisense service ################
-    ?disaster a coy:Disaster;
-                    coy:hasLocation ?country_dis;
-                    coy:hasTimestamp ?timestamp.
-                    
-    bind(year(?timestamp) as ?year_dis)
-    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
-    filter(?country_dis_code='CHN')        
-    }group by ?country_dis_code ?year_dis
-    }
-    filter(?year_dis=?year)
+{
+        select ?year_dis (count(?disaster) as ?no_of_disaster_events)
+        where { ########## Please add Implisense service ################
+        ?disaster a coy:Disaster;
+                        coy:hasLocation ?country_dis;
+                        coy:hasTimestamp ?timestamp.
+                        
+        bind(year(?timestamp) as ?year_dis)
+        bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+        filter(?country_dis_code='CHN')        
+        }group by ?country_dis_code ?year_dis
+}
+filter(?year_dis=?year)
 }
 order by ?year
 """
