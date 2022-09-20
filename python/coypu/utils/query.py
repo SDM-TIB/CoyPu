@@ -68,9 +68,9 @@ class Query:
             print("Failed Query: {}".format(str(e)))
             
     @timer
-    def to_save(self, save_path, filename=None):
+    def to_save(self, save_path, filename=None, ext='.csv'):
         filename = '_'.join(self.filename.split(' '))
-        with open(join(save_path, filename+'.raw'), 'wb') as fd:
+        with open(join(save_path, filename+ext), 'wb') as fd:
             for chunk in self.response.iter_content(chunk_size=128):
                 fd.write(chunk)
         # return pd.read_csv(StringIO(str(response.content, 'utf-8')))

@@ -1,4 +1,4 @@
-prefixes = """DONT_ACCEPT_BLANKLINE
+prefixes = """PREFIX coy: <https://schema.coypu.org/global#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -68,9 +68,9 @@ SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql> {
 
 
  
-query_1_desc = "Query1: percentage of fatalities with respect to country population in a year"
+query_1_desc = "Query1: fatalities per million population for a country in a year"
 query_1 = prefixes + """
-SELECT ?isoCode ?year ((sum(?fatalities_int)/avg(?population))*100 as ?per_fatalities) (count(?iri) as ?no_of_acled_events) 
+SELECT ?isoCode ?year ((sum(?fatalities_int)/avg(?population))*1000000 as ?fatalities_per_million) (count(?iri) as ?no_of_acled_events) 
 WHERE {
     ?iri a coy:AcledEvent ;
     coy:hasIsoCode ?isoCode ;
@@ -90,8 +90,9 @@ WHERE {
         bind(year(?time) as ?year_w)
         SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}  
     }
-    filter(?year_w=?year && ?country_code_wiki=?isoCode)  
-}group by ?isoCode ?year 
+filter(?year_w=?year && ?country_code_wiki=?isoCode)  
+}group by ?isoCode ?year
+order by desc (?year) 
 LIMIT 10
 """
 
@@ -139,7 +140,7 @@ order by ?country ?isoCode ?year
 limit 2000
 """
 
-query_3_desc = "Gdp per captita for countries - WB and Wikidata"
+query_3_desc = "Gdp per captita for countries in different years WB and Wikidata"
 query_3 = prefixes + """select ?country ?year ?value ?population (?value/?population as ?gdp_per_capita)
 where {
 
@@ -169,6 +170,57 @@ select ?country_code_wiki ?year_w ?population
 }
 filter(?year_w=?year && ?country_code_wiki=?country_code)
 }order by ?country ?year
+"""
+
+query_4_desc = "Carbon emission and no of disaster events in years for country China"
+query_4 = """select  ?country_code ?year ?value ?no_of_disaster_events
+where {
+
+service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
+?indicator a wb:AnnualIndicatorEntry;
+           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+           wb:hasCountry ?country;
+           owl:hasValue ?value;        
+           time:year ?year.
+           
+bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+filter(?country_code='CHN' )
+}
+    {
+    select ?year_dis (count(?disaster) as ?no_of_disaster_events)
+    where { ########## Please add Implisense service ################
+    ?disaster a coy:Disaster;
+                    coy:hasLocation ?country_dis;
+                    coy:hasTimestamp ?timestamp.
+                    
+    bind(year(?timestamp) as ?year_dis)
+    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+    filter(?country_dis_code='CHN')        
+    }group by ?country_dis_code ?year_dis
+    }
+    filter(?year_dis=?year)
+}
+order by ?year
+"""
+
+query_5_desc = "find industry for the country"
+query_5 = """"select ?company ?company_label ?industry
+where
+{
+########## Please add Implisense service below################
+    <https://data.coypu.org/company/7d/DEPIYX8Y4M82> coy:hasName ?company_label.
+             
+    bind(str(<https://data.coypu.org/company/7d/DEPIYX8Y4M82>) as ?company)
+    
+    Service <https://dbpedia.org/sparql>{
+        ?Company_db a dbo:Company;
+                 rdfs:label ?company_label_db;
+                 dbp:name ?name;
+                 dbo:industry ?industry.
+    filter(regex(?company_label_db, ?company_label) && lang(?name)='en')
+    }
+}
+limit 10
 """
 
 
