@@ -4,7 +4,15 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX time: <http://www.w3.org/2006/time#> 
-PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <https://www.geonames.org/ontology#>
+"""
+
+prefixes_wiki = """PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdv: <http://www.wikidata.org/value/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -12,13 +20,7 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
-PREFIX bd: <http://www.bigdata.com/rdf#>
-PREFIX wb: <http://worldbank.org/>
-PREFIX wbi: <http://worldbank.org/Indicator/>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX dbo: <http://dbpedia.org/ontology/>
-"""
+PREFIX bd: <http://www.bigdata.com/rdf#>"""
 
 query_0_desc = "Query0: Test query"
 query_0 = prefixes + """
@@ -34,7 +36,7 @@ SELECT * WHERE{
 LIMIT 10
 """
 
-query_test_public_service = prefixes +"""
+query_test_public_service = prefixes + prefixes_wiki+"""
 SELECT * WHERE { 
 SERVICE <https://query.wikidata.org/sparql> {
     ?subject rdf:type ?object
@@ -72,7 +74,7 @@ SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql> {
 
  
 query_1_desc = "Query1: fatalities per million population for a country in a year"
-query_1 = prefixes + """
+query_1 = prefixes + prefixes_wiki+ """
 SELECT ?isoCode ?year ((sum(?fatalities_int)/avg(?population))*1000000 as ?fatalities_per_million) (count(?iri) as ?no_of_acled_events) 
 WHERE {
     ?iri a coy:AcledEvent ;
@@ -122,7 +124,7 @@ limit 2000
 """
 
 query_3_desc = "Query 3: Gdp per captita for countries in different years WB and Wikidata"
-query_3 = prefixes + """select ?country ?year ?value ?population (?value/?population as ?gdp_per_capita)
+query_3 = prefixes + prefixes_wiki+ """select ?country ?year ?value ?population (?value/?population as ?gdp_per_capita)
 where {
 
     SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
@@ -212,7 +214,7 @@ For example:
 ?c = ‘CHN’
 ?i = <http://worldbank.org/Indicator/EN.ATM.CO2E.KT>
 """
-query_1_fdq = """SELECT ?year ?value ?disaster
+query_1_fdq = """SELECT ?year ?year_dis ?value ?disaster
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
     ?indicator wb:hasIndicator ?i .
@@ -222,25 +224,25 @@ WHERE {
     ?country   dc:identifier ?c .
 
     ?disaster a coy:Disaster .
-    ?disaster coy:hasLocation ?country_dis .
-    ?disaster time:year ?year .
-    ?country_dis coy:code-3166-1-alpha-3 ?c .
+    ?disaster time:year ?year_dis .
+    ?disaster geo:countryCode ?c .
+
 }
 """
 
-query_1_fdq_ex = prefixes+"""SELECT ?year ?value ?disaster
+query_1_fdq_ex = prefixes+"""SELECT ?c ?year ?year_dis ?value ?disaster
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
-    ?indicator wb:hasIndicator wbi:EN.ATM.CO2E.KT .
+    ?indicator wb:hasIndicator <http://worldbank.org/Indicator/EN.ATM.CO2E.KT> .
     ?indicator wb:hasCountry ?country .
     ?indicator owl:hasValue ?value .
     ?indicator time:year ?year .
-    ?country   dc:identifier 'CHN' .
+    ?country   dc:identifier ?c .
 
     ?disaster a coy:Disaster .
-    ?disaster coy:hasLocation ?country_dis .
-    ?disaster time:year ?year .
-    ?country_dis coy:code-3166-1-alpha-3 'CHN' .
+    ?disaster time:year ?year_dis .
+    ?disaster geo:countryCode ?c .
+
 }
 """
 
@@ -263,7 +265,7 @@ query_2_fdq = """SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
 }
 """
 
-query_2_fdq_ex = prefixes+"""SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
+query_2_fdq_ex = prefixes+ prefixes_wiki+ """SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
     ?country dc:identifier 'DEU' .
     ?country a wb:Country .
     ?country owl:sameAs ?sameAsCountry .
@@ -298,7 +300,7 @@ WHERE {
 }
 """
 
-query_3_fdq_ex = prefixes+"""SELECT ?year ?time ?value ?population
+query_3_fdq_ex = prefixes+ prefixes_wiki+ """SELECT ?year ?time ?value ?population
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
     ?indicator wb:hasIndicator <http://worldbank.org/Indicator/NY.GDP.MKTP.CD> .
@@ -333,7 +335,7 @@ WHERE {
     ?itemP ps:P1082 ?population .
 }
 """
-query_4_fdq_ex = prefixes+"""SELECT ?timestamp ?time ?fatalities ?population ?iri
+query_4_fdq_ex = prefixes+prefixes_wiki+"""SELECT ?timestamp ?time ?fatalities ?population ?iri
 WHERE {
     ?iri a coy:AcledEvent .
     ?iri coy:hasIsoCode 'SYR' .
