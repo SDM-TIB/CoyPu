@@ -245,21 +245,26 @@ WHERE {
 
 }
 """
-query_1_fdq_ex_sql = """SELECT country_code.value, year.value, value.value, COUNT(disaster.value) AS no_of_disasters
+query_1_fdq_ex_sql = """SELECT country_code, year, AVG(value) as carbon_emission, COUNT(disaster) AS no_of_disasters
 FROM `query_1_fdq_ex`
-WHERE year.value=year_dis.value
-GROUP By country_code.value, year.value, value.value"""
+WHERE year=year_dis
+GROUP By country_code, year
+Order By  year ASC"""
 
 
-query_2_fdq_desc="""Q2: For a given country (?c), return the life expectancy from World Bank and Wikidata per year for that country.
+query_2_fdq_desc="""Q2: For a given country (?country_code), return the life expectancy from World Bank and Wikidata per year for that country.
 For example:
-?c = ‘DEU’
+?country_code = ‘DEU’
 """
 query_2_fdq = """SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
-    ?country dc:identifier ?c .
     ?country a wb:Country .
+    ?country dc:identifier ?country_code .
+    ?country rdfs:label ?country_name .
+    ?country dbo:region ?region .
     ?country owl:sameAs ?sameAsCountry .
     ?country wb:hasAnnualIndicatorEntry ?annualIndicator .
+    
+    
     ?annualIndicator wb:hasIndicator <http://worldbank.org/Indicator/SP.DYN.LE00.IN> .
     ?annualIndicator owl:hasValue ?year_exp_WB .
     ?annualIndicator time:year ?year_WB .
@@ -270,11 +275,14 @@ query_2_fdq = """SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
 }
 """
 
-query_2_fdq_ex = prefixes+ prefixes_wiki+ """SELECT DISTINCT ?date ?year_WB ?year_exp ?year_exp_WB WHERE {
-    ?country dc:identifier 'DEU' .
+query_2_fdq_ex = prefixes+ prefixes_wiki+ """SELECT DISTINCT ?country_code ?country_name ?year_WB ?date ?year_exp ?year_exp_WB WHERE {
     ?country a wb:Country .
+    ?country dc:identifier ?country_code .
+    ?country rdfs:label ?country_name.
+    ?country dbo:region ?region.
     ?country owl:sameAs ?sameAsCountry .
     ?country wb:hasAnnualIndicatorEntry ?annualIndicator .
+    
     ?annualIndicator wb:hasIndicator <http://worldbank.org/Indicator/SP.DYN.LE00.IN> .
     ?annualIndicator owl:hasValue ?year_exp_WB .
     ?annualIndicator time:year ?year_WB .
@@ -284,42 +292,64 @@ query_2_fdq_ex = prefixes+ prefixes_wiki+ """SELECT DISTINCT ?date ?year_WB ?yea
     ?itemLifeExpectancy pq:P585 ?date .
 }
 """
+
+query_2_fdq_ex_sql = """SELECT country_code, country_name, year_WB, AVG(year_exp) AS year_avg_exp_wiki, AVG(year_exp_WB) AS year_avg_exp_WB
+FROM `query_2_fdq_ex`
+WHERE YEAR(date)=year_WB
+GROUP BY country_code, country_name, year_WB"""
 
 query_3_fdq_desc="""Q3: For a given country (?c), return the GDP, the population and the GDP per capita per year for that country.
 For example:
 ?c = ‘DEU’
 """
-query_3_fdq = """SELECT ?year ?time ?value ?population
+query_3_fdq = """PREFIX wb: <http://worldbank.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+SELECT ?year ?value ?population
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
     ?indicator wb:hasIndicator <http://worldbank.org/Indicator/NY.GDP.MKTP.CD> .
     ?indicator wb:hasCountry ?country .
     ?indicator owl:hasValue ?value .
-    ?indicator time:year ?year .
-    ?country dc:identifier ?c .
-    ?country owl:sameAs ?countryWiki .
+    ?indicator wb:worldBankDateYear ?year .
+    ?country <http://purl.org/dc/elements/1.1/identifier> ?c .
 
+    ?countryWiki p:P298 ?isoCode .
+    ?isoCode ps:P298 ?c .
     ?countryWiki p:P1082 ?itemP .
-    ?itemP pq:P585 ?time .
+    ?itemP pq:P585 ?year .
     ?itemP ps:P1082 ?population .
-}
 """
 
-query_3_fdq_ex = prefixes+ prefixes_wiki+ """SELECT ?year ?time ?value ?population
+query_3_fdq_ex = prefixes+ prefixes_wiki+ """PREFIX wb: <http://worldbank.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+SELECT ?year ?value ?population
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
     ?indicator wb:hasIndicator <http://worldbank.org/Indicator/NY.GDP.MKTP.CD> .
     ?indicator wb:hasCountry ?country .
     ?indicator owl:hasValue ?value .
-    ?indicator time:year ?year .
-    ?country dc:identifier 'DEU' .
-    ?country owl:sameAs ?countryWiki .
+    ?indicator wb:worldBankDateYear ?year .
+    ?country <http://purl.org/dc/elements/1.1/identifier> 'DEU' .
 
+    ?countryWiki p:P298 ?isoCode .
+    ?isoCode ps:P298 'DEU' .
     ?countryWiki p:P1082 ?itemP .
-    ?itemP pq:P585 ?time .
+    ?itemP pq:P585 ?year .
     ?itemP ps:P1082 ?population .
-}
 """
+
+query_4_fdq_ex_sql = """
+"""
+
+
 
 query_4_fdq_desc="""Q4: For a given country (?c) and event type (?et), return the fatality percentage and number of events of the specified type per year for that country.
 For example:
