@@ -5,7 +5,6 @@ import pandas as pd
 from io import StringIO
 print(__package__)
 from os.path import join
-from coypu.datasets import DBSQL
 from functools import reduce
 
 class Query:
@@ -69,28 +68,23 @@ class Query:
             print("Failed Query: {}".format(str(e)))
             
     @timer
-    def to_save(self, save_path, filename=None):
+    def to_save(self, save_path, filename:str):
         filename = '_'.join(filename.split(' '))
-        if self.response['Content-Type']=='text/csv':
+        if self.response.headers['Content-Type']=='text/csv':
             with open(join(save_path, filename+'.csv'), 'wb') as fd:
                 for chunk in self.response.iter_content(chunk_size=128):
                     fd.write(chunk)
-        elif self.response['Content-Type']=='application/json':
+        elif self.response.headers['Content-Type']=='application/json':
             with open(join(save_path, filename+'.json'), 'wb') as fd:
                 for chunk in self.response.iter_content(chunk_size=128):
                     fd.write(chunk)
-            pd.json_normalize(self.response['results']['bindings']).to_csv(join(save_path, filename+'.csv'), encoding='utf-8')
+            json_to_csv(self.response.json()['results']['bindings'], save_path, \
+                filename, columns=[var+'.value' for var in self.response.json()['head']['vars']])    
         else:
             raise TypeError("Unknown response content-type")
+        
+        del self.response
         # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
-        
-    @timer
-    def df_to_db(self, df:pd.DataFrame, db:DBSQL, table_name, file_path):
-        db.df_to_sql(df, table_name)
-        
-    @timer
-    def read_query_from_db_as_df(self, query, db:DBSQL):
-        return db.read_sql_as_df(query)
         
 
 def main(client_url='', client_id='', client_secret='',

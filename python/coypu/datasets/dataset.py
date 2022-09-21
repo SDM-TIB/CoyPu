@@ -71,14 +71,23 @@ class FastArrayProcessing():
         return process_map(self.func, self.array, max_workers=self.n_workers, chunksize=batch_size)
     
 
-class DBSQL():
+class DBCON():
     def __init__(self, host, port, uname, pwd, dbname):
         self._host = host
         self._port = port
         self._uname = uname
         self._pwd = pwd
         self._dbname = dbname
-        print ('Create object with keyword of python')
+        
+    def create_con(self):
+        engine = create_engine(
+        "mysql+pymysql://{user}:{pw}@{hostname}:{portno}/{db}".format(
+            hostname=self._host, db=self._dbname, user=self._uname, pw=self._pwd, portno=self._port
+        ),)
+        self = engine.connect()
+        
+    def close_con(self):
+        self.dbcon.close()
         
     def __enter__(self):
         engine = create_engine(
@@ -88,20 +97,26 @@ class DBSQL():
         self.dbcon = engine.connect()
         return self
     
-    def get_mysql_con(self):
-        return self.dbcon
-        
-    def df_to_sql(self, df:pd.DataFrame, table_name=None):
-        df.to_sql(table_name, con=self.dbcon, index=False, if_exists="fail")
-        
-    def read_sql_as_df(self, query):
-        return pd.read_sql(query, self.dbcon)
-    
     def __exit__(self, type, value, traceback):
         if all((type, value, traceback)):
             raise (type, value, traceback)
         self.dbcon.close()
         return True
+    
+    def get_mysql_con(self):
+        return self.dbcon
+    
+    
+''' class DFExt(pd.DataFrame):
+    def __init__(self, *args, **kargs):
+        super().__init__(*args, **kargs)
+        
+    def to_db(self, con:DBCON, table_name):
+        self.to_sql(table_name, con=con, index=False, if_exists="fail")
+        
+    def read_db(self, query, con:DBCON):
+        return pd.read_sql(query, con) '''
+
 
 def main():
     pass

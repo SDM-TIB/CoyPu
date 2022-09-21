@@ -209,9 +209,9 @@ where
 limit 10
 """
 
-query_1_fdq_desc="""Q1: For a given country (?c) and indicator (?i), return the value of the indicator and the number of disasters registered per year in that country.
+query_1_fdq_desc="""Q1: For a given country (?country_code) and indicator (?i), return the value of the indicator and the number of disasters registered per year in that country.
 For example:
-?c = ‘CHN’
+?country_code = ‘CHN’
 ?i = <http://worldbank.org/Indicator/EN.ATM.CO2E.KT>
 """
 query_1_fdq = """SELECT ?year ?year_dis ?value ?disaster
@@ -221,30 +221,35 @@ WHERE {
     ?indicator wb:hasCountry ?country .
     ?indicator owl:hasValue ?value .
     ?indicator time:year ?year .
-    ?country   dc:identifier ?c .
+    ?country   dc:identifier ?country_code .
 
     ?disaster a coy:Disaster .
     ?disaster time:year ?year_dis .
-    ?disaster geo:countryCode ?c .
+    ?disaster geo:countryCode ?country_code .
 
 }
 """
 
-query_1_fdq_ex = prefixes+"""SELECT ?c ?year ?year_dis ?value ?disaster
+query_1_fdq_ex = prefixes+"""SELECT ?country_code ?year ?year_dis ?value ?disaster
 WHERE {
     ?indicator a wb:AnnualIndicatorEntry .
     ?indicator wb:hasIndicator <http://worldbank.org/Indicator/EN.ATM.CO2E.KT> .
     ?indicator wb:hasCountry ?country .
     ?indicator owl:hasValue ?value .
     ?indicator time:year ?year .
-    ?country   dc:identifier ?c .
+    ?country   dc:identifier ?country_code .
 
     ?disaster a coy:Disaster .
     ?disaster time:year ?year_dis .
-    ?disaster geo:countryCode ?c .
+    ?disaster geo:countryCode ?country_code .
 
 }
 """
+query_1_fdq_ex_sql = """SELECT country_code.value, year.value, value.value, COUNT(disaster.value) AS no_of_disasters
+FROM `query_1_fdq_ex`
+WHERE year.value=year_dis.value
+GROUP By country_code.value, year.value, value.value"""
+
 
 query_2_fdq_desc="""Q2: For a given country (?c), return the life expectancy from World Bank and Wikidata per year for that country.
 For example:

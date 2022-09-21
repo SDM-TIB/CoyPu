@@ -65,5 +65,6 @@ def timer(func):
 
 def json_to_csv(json, save_path, filename, columns=None):
     df = pd.json_normalize(json)
-    df.to_csv(join(save_path, filename+'.csv'), encoding='utf-8')
+    df.rename(columns=lambda x: x.replace('.value', ''), inplace=True)
+    df.to_csv(join(save_path, filename+'.csv'), encoding='utf-8', columns=columns, index=False)
 
