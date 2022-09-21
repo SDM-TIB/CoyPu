@@ -6,6 +6,7 @@ from io import StringIO
 print(__package__)
 from os.path import join
 from coypu.datasets import DBSQL
+from functools import reduce
 
 class Query:
     def __init__(self, url, id_or_user=None, pass_or_secret=None, auth_type:str=None, is_fdq=False):
@@ -68,11 +69,19 @@ class Query:
             print("Failed Query: {}".format(str(e)))
             
     @timer
-    def to_save(self, save_path, filename=None, ext='.csv'):
+    def to_save(self, save_path, filename=None):
         filename = '_'.join(filename.split(' '))
-        with open(join(save_path, filename+ext), 'wb') as fd:
-            for chunk in self.response.iter_content(chunk_size=128):
-                fd.write(chunk)
+        if self.response['Content-Type']=='text/csv':
+            with open(join(save_path, filename+'.csv'), 'wb') as fd:
+                for chunk in self.response.iter_content(chunk_size=128):
+                    fd.write(chunk)
+        elif self.response['Content-Type']=='application/json':
+            with open(join(save_path, filename+'.json'), 'wb') as fd:
+                for chunk in self.response.iter_content(chunk_size=128):
+                    fd.write(chunk)
+            pd.json_normalize(self.response['results']['bindings']).to_csv(join(save_path, filename+'.csv'), encoding='utf-8')
+        else:
+            raise TypeError("Unknown response content-type")
         # return pd.read_csv(StringIO(str(response.content, 'utf-8')))
         
     @timer
