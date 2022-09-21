@@ -4,6 +4,7 @@ import requests
 import base64
 import time
 import functools
+from os.path import join
 
 def replace(self, updated_file: str, replace: dict = {'\'': ''},
             header: bool = False, index=False):
@@ -61,4 +62,8 @@ def timer(func):
         print('Total time taken by {} function: {}'.format(func.__name__,time.time()-time_pre))
         return ret
     return wrapper
+
+def json_to_csv(json, save_path, filename, columns=None):
+    df = pd.json_normalize(json)
+    df.to_csv(join(save_path, filename+'.csv'), encoding='utf-8')
 
