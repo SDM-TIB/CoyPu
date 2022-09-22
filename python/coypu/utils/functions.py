@@ -63,9 +63,12 @@ def timer(func):
         return ret
     return wrapper
 
+@timer
 def json_to_csv(json, save_path, filename, columns=None, ret=False):
     df = pd.json_normalize(json)
     # print(df.columns)
+    print(df.memory_usage())
+    print(df.info(memory_usage=True))
     df.to_csv(join(save_path, filename+'.csv'), encoding='utf-8', columns=columns, index=False)
     if ret:
         return df[columns]

@@ -346,7 +346,9 @@ WHERE {
     ?itemP ps:P1082 ?population .
 """
 
-query_4_fdq_ex_sql = """
+query_3_fdq_ex_sql = """SELECT isocode, country, YEAR(year) AS year1, (value/population) AS `gdp_per_capita($)`
+FROM `query_3_fdq_ex`
+ORDER BY year1, isocode
 """
 
 
