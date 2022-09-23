@@ -386,6 +386,11 @@ WHERE {
     ?itemP ps:P1082 ?population .
 }
 """
+query_4_fdq_ex_sql = """SELECT isocode, country, year, SUM(fatalities*1000000/population) AS fatalities_per_million
+FROM `query_4_fdq_ex`
+WHERE YEAR(timestamp)=year
+GROUP BY year, isocode, country
+"""
 
 
 
