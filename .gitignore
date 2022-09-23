@@ -8,7 +8,10 @@ graphdb-home/repositories/
 endpoints.json
 endpoints.txt
 generated_rdf_graph_data/*.ttl
-query_results/*.json
+query_results/
+nohup.out
+rdfmts.json.old
+rdfmts.json
 
 # private data files
 credentials.py

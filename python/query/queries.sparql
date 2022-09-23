@@ -148,3 +148,414 @@ WHERE{
         ips:capacity ?capacity .
 }
 
+PREFIX wb: <http://worldbank.org/>
+
+Describe ?country
+
+where {
+?country a wb:AnnualIndicatorEntry;
+         wb:hasCountry <http://worldbank.org/Country/IND>
+
+} LIMIT 400
+
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+        filter(str(?country_code)="IND")
+    }
+
+
+SERVICE <https://query.wikidata.org/sparql>{
+
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                  wdt:P298 ?country_code_wiki;
+                 p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+           ps:P1082 ?population
+        bind(year(?time) as ?year_w)
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
+
+filter(?year_w=?year && ?country_code_wiki=?country_code)
+}order by ?country ?year
+limit 50
+
+
+
+
+SELECT ?countryLabel ?population (round(?population/?worldpopulation*1000)/10 AS ?percentage)
+WHERE {
+  ?country wdt:P31 wd:Q3624078;    # is a sovereign state
+           wdt:P1082 ?population.
+
+  { 
+    # subquery to determine ?worldpopulation
+    SELECT (sum(?population) AS ?worldpopulation)
+    WHERE { 
+      ?country wdt:P31 wd:Q3624078;    # is a sovereign state
+               wdt:P1082 ?population. 
+    }
+  }
+
+  SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
+ORDER BY desc(?population)
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+        filter(str(?country_code)="IND")
+    }
+
+{select ?year_w ?population 
+    where {
+        SERVICE <https://query.wikidata.org/sparql>{
+
+            ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+            ?p pq:P585 ?time;
+               ps:P1082 ?population
+            bind(year(?time) as ?year_w)
+           filter(str(?country_code_wiki)="IND")
+            SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+                } }}
+filter(?year_w=?year)
+}order by ?country ?year
+limit 100
+
+
+## tech companies
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX psv: <http://www.wikidata.org/prop/statement/value/>
+ PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
+
+select ?cLabel ?countryLabel ?lat ?long {
+  ?c 
+     #wdt:P31/wdt:P279* wd:Q18388277 ;
+     p:P452/ps:P452/wdt:P279* wd:Q1326885 ; # electrical industy
+     wdt:P17 ?country . 
+     ?country p:P625/psv:P625 ?coordinate .
+     ?coordinate wikibase:geoLatitude ?lat ;
+                 wikibase:geoLongitude ?long .
+     #wdt:P1056 ?product
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+  }
+
+
+# Conflicts
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?iri ?hasName ?hasFatalities ?hasLocation ?hasActor ?hasLatitude ?hasLongitude ?hasIsoCode ?hasTimestamp
+FROM <https://data.coypu.org/>
+WHERE {
+    ?iri a coy:AcledEvent ;
+    rdfs:label ?hasName ;
+    coy:hasFatalities ?hasFatalities ;
+    coy:hasLocation ?hasLocation ;    
+    coy:hasActor ?hasActor ;    
+    coy:hasLatitude ?hasLatitude ;
+    coy:hasLongitude ?hasLongitude ;
+    coy:hasIsoCode ?hasIsoCode ;
+    coy:hasTimestamp ?hasTimestamp .
+    } LIMIT 100
+
+# hasLocation Problem
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT Distinct ?class 
+FROM <https://data.coypu.org/>
+WHERE {
+  ?class a owl:Class.
+  ?sub a ?class;
+       coy:hasLocation ?obj .
+  
+}Limit 10
+
+
+#company size
+PREFIX coy: <https://schema.coypu.org/global#>
+
+select distinct ?company_size
+where {
+    ?company coy:hasLocation ?location;
+             coy:hasCompanySize ?company_size
+} limit 10
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+select  ?country_code ?year ?value ?no_of_disaster_events
+where {
+
+service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
+?indicator a wb:AnnualIndicatorEntry;
+           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+           wb:hasCountry ?country;
+           owl:hasValue ?value;        
+           time:year ?year.
+           
+bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+filter(?country_code='CHN' )
+}
+    {
+    select ?year_dis (count(?disaster) as ?no_of_disaster_events)
+    where { ########## Please add Implisense service ################
+    ?disaster a coy:Disaster;
+                    coy:hasLocation ?country_dis;
+                    coy:hasTimestamp ?timestamp.
+                    
+    bind(year(?timestamp) as ?year_dis)
+    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+    filter(?country_dis_code='CHN')        
+    }group by ?country_dis_code ?year_dis
+    }
+    filter(?year_dis=?year)
+}
+order by ?year
+
+############################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+select ?country_code ?year ?value ?no_of_disaster_events
+where {
+
+service <https://labs.tib.eu/sdm/worldbank_endpoint/sparql>{
+?indicator a wb:AnnualIndicatorEntry;
+           wb:hasIndicator wbi:EN.ATM.CO2E.KT;
+           wb:hasCountry ?country;
+           owl:hasValue ?value;        
+           time:year ?year.
+           
+bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code )
+}
+ 
+    {
+    select ?country_dis_code ?year_dis (count(?disaster) as ?no_of_disaster_events)
+    where {   ########## Please add Implisense service below################
+    ?disaster a coy:Disaster;
+                    coy:hasLocation ?country_dis;
+                    coy:hasTimestamp ?timestamp.
+                    
+    bind(year(?timestamp) as ?year_dis)
+    bind(replace(str(?country_dis),"https://data.coypu.org/country/", "") as ?country_dis_code )                
+    }group by ?country_dis_code ?year_dis
+    }
+    filter(?country_code=?country_dis_code && ?year_dis=?year)
+}
+order by ?country_code ?year
+
+###########################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+select ?country ?year ?value ?population (?value/?population as ?gdp_capita)
+where {
+
+    SERVICE <https://labs.tib.eu/sdm/worldbank_endpoint/sparql/> {
+			?indicator a wb:AnnualIndicatorEntry;
+                       wb:hasIndicator wbi:NY.GDP.MKTP.CD;
+                       wb:hasCountry ?country;
+                       owl:hasValue ?value;        
+                       time:year ?year.
+            bind(replace(str(?country),"http://worldbank.org/Country/", "") as ?country_code ) 
+            filter(str(?country_code)="DEU")
+    }
+
+{
+select ?year_w ?population 
+    where {SERVICE <https://query.wikidata.org/sparql>{
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+               ps:P1082 ?population
+        bind(year(?time) as ?year_w)
+        filter(str(?country_code_wiki)="DEU")
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+            }} 
+}
+filter(?year_w=?year)
+}order by ?country ?year
+limit 100
+
+
+############################################################################
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?isoCode ?year ((sum(?fatalities_int)/avg(?population))*100 as ?per_fatalities) (count(?iri) as ?no_of_acled_events) 
+WHERE {
+    ########## Please add Implisense service below################
+    ?iri a coy:AcledEvent ;
+    coy:hasIsoCode ?isoCode ;
+    coy:hasTimestamp ?timestamp;
+    coy:hasFatalities ?fatalities.
+    bind(year(?timestamp) as ?year)
+    bind (xsd:integer(?fatalities) as ?fatalities_int)
+    filter(?isoCode='SYR')
+    
+    SERVICE <https://query.wikidata.org/sparql>
+    {
+        ?country_wiki wdt:P31 wd:Q3624078; 
+                      wdt:P298 ?country_code_wiki;
+                     p:P1082 ?p.
+
+        ?p pq:P585 ?time;
+               ps:P1082 ?population.
+        bind(year(?time) as ?year_w)
+        SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".} 
+    	filter(?country_code_wiki='SYR' && ?year_w=?year)
+    }
+}group by ?isoCode ?year
+
+
+
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX wb: <http://worldbank.org/> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+
+SELECT Distinct count(?publisher) as ?c_publisher
+{
+  ?indicator rdf:type wb:Indicator;
+             dcterms:publisher ?publisher.
+ }
+
+
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX wb: <http://worldbank.org/> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+
+SELECT Distinct count(?indicator )
+{
+  ?indicator rdf:type wb:Indicator.
+    
+  FILTER NOT EXISTS { ?indicator dcterms:publisher ?publisher}  
+
+}
+
+
+GDP: NY.GDP.MKTP.CD
+GNE: NE.DAB.TOTL.CD
+GDP_PER_CAPITA: NY.GDP.PCAP.CN
+HCI: HD.HCI.OVRL
+GINI: SI.POV.GINI
+Industry(% GDP): NV.IND.TOTL.ZS
