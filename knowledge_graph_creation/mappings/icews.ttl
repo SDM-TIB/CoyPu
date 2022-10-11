@@ -11,6 +11,7 @@
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix gn: <https://www.geonames.org/ontology#> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
 @prefix coy: <https://schema.coypu.org/global#> .
 
 :Source
@@ -105,6 +106,7 @@
     rr:predicateObjectMap [
         rr:predicate coy:hasCountryLocation;
         rr:objectMap [rml:reference "Country"];
+        # https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
     ];
 
     rr:predicateObjectMap [
