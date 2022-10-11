@@ -13,7 +13,7 @@ services:
       - coypu_net
 
   semantic-enrichment:
-    image: eiglesias34/sdmrdffizer:4.4.3 # Update to latest version
+    image: eiglesias34/sdmrdffizer:4.5.4 # Update to latest version
     hostname: semantic-enrichment
     container_name: semantic_enrichment
     domainname: coypu
