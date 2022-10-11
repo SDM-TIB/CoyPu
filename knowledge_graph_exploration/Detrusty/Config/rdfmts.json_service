@@ -1,0 +1,28 @@
+[
+    {
+        "rootType": "http://class.com/1",
+        "predicates": [],
+        "linkedTo": [],
+        "wrappers": [
+            {
+                "url": "https://implisense.coypu.org/dataplatform/proxy/default/sparql",
+                "predicates": [],
+                "urlparam": {
+                    "keycloak": "https://implisense.coypu.org/auth/realms/cmem/protocol/openid-connect/token",
+                    "username": "tib-federated-engine",
+                    "password": "GrTkVCHQZw8xWLdbrfbldDZOLiOqcigu"
+                },
+                "wrapperType": "SPARQLEndpoint"
+            },
+            {
+                "url": "http://coypu-fuseki.aksw.org/country/sparql",
+                "predicates": [],
+                "urlparam": {
+                    "username": "coypu",
+                    "password": "coypu"
+                },
+                "wrapperType": "SPARQLEndpoint"
+            }
+        ]
+    }
+]
