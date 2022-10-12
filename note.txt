@@ -4,6 +4,8 @@ Test Query
 # docker exec -it coypu_endpoint bash
 # isql-v
 # SELECT * FROM db.dba.load_list;
+# https://vos.openlinksw.com/owiki/wiki/VOS/VirtBulkRDFLoader
+
 
 # SQL QUERY
 SPARQL SELECT * FROM <https://l3s.coypu.org> WHERE {?s ?p ?o.};

@@ -74,6 +74,7 @@ while true; do
     case $yn in
         [Yy]* ) echo '#####################Copying Graphs Data to Triple Store ##################'
                 rsync -avP generated_rdf_graph_data/*.nt node2:/data/coypu/sparql_endpoint/data_load
+                # rsync -avP generated_rdf_graph_data/*.ttl node2:/data/coypu/sparql_endpoint/data_load
 
                 echo '##################### Backing-up Graphs Data on Triple Store ##################'
                 rsync ssh 'cp /data/coypu/sparql_endpoint/data_load/*.nt /data/coypu/sparql_endpoint/data_backup/'

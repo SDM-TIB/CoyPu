@@ -307,11 +307,11 @@
     
     rr:subjectMap [
         rr:template "https://data.coypu.org/lei/{Relationship.StartNode.NodeID}";
-        rr:class coy:LegalEntity;
+        rr:class gleif-L1:LegalEntity;
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasLegalEntityType;
+        rr:predicate coy:hasEntityType;
         rr:objectMap [ rml:reference "Relationship.StartNode.NodeIDType" ];
     ];
 

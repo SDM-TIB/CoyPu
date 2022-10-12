@@ -29,12 +29,12 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate xsd:date;
+        rr:predicate coy:hasDate;
         rr:objectMap [ rml:reference "Event Date"];
     ];
     
 	 rr:predicateObjectMap [
-        rr:predicate coy:hasSource;
+        rr:predicate coy:hasSourceName;
         rr:objectMap [ rml:reference "Source Name"];
     ];
 	
@@ -64,7 +64,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasTarget;
+        rr:predicate coy:hasTargetName;
         rr:objectMap [rml:reference "Target Name"]
     ];
 
@@ -94,12 +94,12 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasDistrict;
+        rr:predicate coy:hasDistrictLocation;
         rr:objectMap [rml:reference "District"];
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasProvince;
+        rr:predicate coy:hasProvinceLocation;
         rr:objectMap [rml:reference "Province"];
     ];
 
