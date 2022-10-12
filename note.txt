@@ -63,6 +63,10 @@ ssh ldm_coypu -L 5000:localhost:5000
 sed -n '20,40p;41q' file_name
 
 
+select count (?inst) 
+where {?inst a <https://schema.coypu.org/global#ICEWSEvent>} LIMIT 200
+
+
 """ Python Script to execute SPARQL queries on WorldBank Endpoint 
 """
 

@@ -20,9 +20,8 @@
 @prefix gleif-repex: <https://www.gleif.org/ontology/ReportingException/> .
 
 :Source
-      #rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
-      # rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
-      rml:source "/data/lei2_sample.csv";
+      rml:source "/data/20220502-0800-gleif-goldencopy-lei2-golden-copy.csv";
+      # rml:source "/data/lei2_sample.csv";
 	  rml:referenceFormulation ql:CSV.
 
 :LegalEntityIdentifierMap a rr:TriplesMap;
@@ -162,12 +161,12 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:ValidationAuthorityID;
+        rr:predicate coy:hasValidationAuthorityID;
         rr:objectMap [ rml:reference "Registration.ValidationAuthority.ValidationAuthorityID"];
     ];
 
      rr:predicateObjectMap [
-        rr:predicate coy:ValidationAuthorityEntityID;
+        rr:predicate coy:hasValidationAuthorityEntityID;
         rr:objectMap [ rml:reference "Registration.ValidationAuthority.ValidationAuthorityEntityID"];
     ].
 
@@ -298,8 +297,8 @@
     ].
 
 :Source1
-      #rml:source "/data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv";
-      rml:source "/data/lei_rr_sample.csv";
+      rml:source "/data/20220502-0800-gleif-goldencopy-rr-golden-copy.csv";
+      # rml:source "/data/lei_rr_sample.csv";
 	  rml:referenceFormulation ql:CSV .
 
 :RelationshipMap a rr:TriplesMap;
