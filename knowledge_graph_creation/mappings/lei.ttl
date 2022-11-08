@@ -218,14 +218,19 @@
         rr:objectMap [ rml:reference "Entity.LegalAddress.City"];
     ];
 
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCityLocation;
+        rr:objectMap [ rr:template "http://data.coypu.org/city/{Entity.LegalAddress.City}"];
+    ];
+
      rr:predicateObjectMap [
         rr:predicate coy:hasSubdivision;
         rr:objectMap [ rml:reference "Entity.LegalAddress.Region"];
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasIso2Code;
-        rr:objectMap [ rml:reference "Entity.LegalAddress.Country"];
+        rr:predicate coy:hasCountryLocation;
+        rr:objectMap [rr:template "http://data.coypu.org/country/{Entity.LegalAddress.Country}"];
     ];
 
       rr:predicateObjectMap [
@@ -282,13 +287,23 @@
     ];
 
      rr:predicateObjectMap [
+        rr:predicate coy:hasCityLocation;
+        rr:objectMap [ rr:template "http://data.coypu.org/city/{Entity.HeadquartersAddress.City}"];
+    ];
+
+     rr:predicateObjectMap [
         rr:predicate gleif-base:hasRegion;
         rr:objectMap [ rml:reference "Entity.HeadquartersAddress.Region"];
     ];
 
     rr:predicateObjectMap [
         rr:predicate gleif-base:hasCountry;
-        rr:objectMap [ rml:reference "Entity.HeadquartersAddress.Country"];
+        rr:objectMap [ rr:template "http://data.coypu.org/country/{Entity.HeadquartersAddress.Country}"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate coy:hasCountryLocation;
+        rr:objectMap [ rr:template "http://data.coypu.org/country/{Entity.HeadquartersAddress.Country}"];
     ];
 
       rr:predicateObjectMap [
@@ -370,3 +385,53 @@
         rr:predicate gleif-L2:hasRelationshipPeriodType;
         rr:objectMap [ rml:reference "Relationship.Period.1.periodType"];
     ].
+
+
+:Wikidata_DBpedia_MetaDataCountry a rr:TriplesMap;
+
+  # Define the data source (file location)
+  rml:logicalSource [
+    rml:source "/data/countries_all_codes_and_wiki_dbp.csv";
+    rml:referenceFormulation ql:CSV
+  ];
+
+  # Define the subject of the generated statements
+  rr:subjectMap [ rr:template "http://data.coypu.org/country/{UNTERM English Short}"];
+
+  # Map the special notes to WikiData data
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs ;
+    rr:objectMap [ rr:template "http://data.coypu.org/country/{ISO3166-1-Alpha-2}" ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs;
+    rr:objectMap [rr:template "http://data.coypu.org/country/{ISO3166-1-Alpha-3}" ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs;
+    rr:objectMap [rr:template "http://data.coypu.org/country/{official_name_en}" ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs;
+    rr:objectMap [rr:template "http://data.coypu.org/country/{UNTERM English Formal}" ]
+  ];
+
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs;
+    rr:objectMap [rr:template "https://sws.geonames.org/{Geoname ID}" ]
+  ];
+
+  # Map the special notes to WikiData data
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs ;
+    rr:objectMap [ rr:template "{WikiData}" ]
+  ];
+
+  # Map the country name to DBpedia data
+  rr:predicateObjectMap [ 
+    rr:predicate owl:sameAs ;
+    rr:objectMap [ rr:template "{DBpedia}" ]
+  ].
