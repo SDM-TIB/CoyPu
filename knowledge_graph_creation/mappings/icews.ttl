@@ -80,7 +80,7 @@
 
     rr:predicateObjectMap [
         rr:predicate coy:hasStoryID;
-        rr:objectMap [rr:template "https://data.coypu.org/icews/{Story ID}"]
+        rr:objectMap [rr:template "{Story ID}"]
     ];
 
     rr:predicateObjectMap [
@@ -130,7 +130,6 @@
   # Define the subject of the generated statements
   rr:subjectMap [ rr:template "http://data.coypu.org/country/{UNTERM English Short}"];
 
-  # Map the special notes to WikiData data
   rr:predicateObjectMap [ 
     rr:predicate owl:sameAs ;
     rr:objectMap [ rr:template "http://data.coypu.org/country/{ISO3166-1-Alpha-2}" ]
@@ -159,7 +158,7 @@
   # Map the special notes to WikiData data
   rr:predicateObjectMap [ 
     rr:predicate owl:sameAs ;
-    rr:objectMap [ rr:template "{WikiData}" ]
+    rr:objectMap [ rr:template "{Wikidata}" ]
   ];
 
   # Map the country name to DBpedia data

@@ -233,7 +233,7 @@
         rr:objectMap [rr:template "http://data.coypu.org/country/{Entity.LegalAddress.Country}"];
     ];
 
-      rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate gleif-base:hasPostalCode;
         rr:objectMap [ rml:reference "Entity.LegalAddress.PostalCode"];
     ].
@@ -427,7 +427,7 @@
   # Map the special notes to WikiData data
   rr:predicateObjectMap [ 
     rr:predicate owl:sameAs ;
-    rr:objectMap [ rr:template "{WikiData}" ]
+    rr:objectMap [ rr:template "{Wikidata}" ]
   ];
 
   # Map the country name to DBpedia data
