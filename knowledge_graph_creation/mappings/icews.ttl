@@ -1,4 +1,4 @@
-@prefix : <https://mappings.coypu.org/lei#> .
+@prefix : <https://mappings.coypu.org/icews#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
@@ -73,7 +73,7 @@
         rr:objectMap [rml:reference "Target Sectors"]
     ];
 
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate coy:hasTargetCountry;
         rr:objectMap [rr:template "http://data.coypu.org/country/{Target Country}"];
     ];
@@ -118,54 +118,3 @@
         rr:predicate coy:hasLongitude;
         rr:objectMap [rml:reference "Longitude"];
     ].
-
-:Wikidata_DBpedia_MetaDataCountry a rr:TriplesMap;
-
-  # Define the data source (file location)
-  rml:logicalSource [
-    rml:source "/data/countries_all_codes_and_wiki_dbp.csv";
-    rml:referenceFormulation ql:CSV
-  ];
-
-  # Define the subject of the generated statements
-  rr:subjectMap [ rr:template "http://data.coypu.org/country/{UNTERM English Short}"];
-
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs ;
-    rr:objectMap [ rr:template "http://data.coypu.org/country/{ISO3166-1-Alpha-2}" ]
-  ];
-
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{ISO3166-1-Alpha-3}" ]
-  ];
-
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{official_name_en}" ]
-  ];
-
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "http://data.coypu.org/country/{UNTERM English Formal}" ]
-  ];
-
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs;
-    rr:objectMap [rr:template "https://sws.geonames.org/{Geoname ID}" ]
-  ];
-
-  # Map the special notes to WikiData data
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs ;
-    rr:objectMap [ rr:template "{Wikidata}" ]
-  ];
-
-  # Map the country name to DBpedia data
-  rr:predicateObjectMap [ 
-    rr:predicate owl:sameAs ;
-    rr:objectMap [ rr:template "{DBpedia}" ]
-  ].
-
-
-

@@ -48,6 +48,7 @@ def main():
     # print(df.dtypes)
     df = df.astype({col:'Int64' for col in df.dtypes.index if df.dtypes[col]=='float64'}, errors='ignore')
     # print(df.dtypes)
+    # print (len(df['ISO3166-1-Alpha-3'].unique()))
     df.to_csv(join(DATASET_DIR, 'countries_all_codes_and_wiki_dbp.csv'), index=False)
 
 
