@@ -12,6 +12,7 @@ query_results/
 nohup.out
 rdfmts.json.old
 rdfmts.json
+generated_rdf_graph_data
 
 # private data files
 credentials.py

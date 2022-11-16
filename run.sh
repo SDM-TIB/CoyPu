@@ -89,4 +89,47 @@ while true; do
     esac
 done
 
+echo '##################### Setting up docker for CoyPU sparql endpoint##################'
+echo '##################### Uploading ICEWS RDF data files to triple store ##################'
+while true; do
+    read -p "Do you wish to upload ICEWS RDF data files to triple store?" yn
+    case $yn in
+        [Yy]* ) echo '#####################Copying ICEWS Graphs Data to Triple Store ##################'
+                rsync -avP generated_rdf_graph_data/icews/*.nt node2:/data/coypu/icews_endpoint/data_load
+                echo '##################### Backing-up ICEWS Graphs Data on Triple Store ##################'
+                rsync ssh 'cp /data/coypu/icews_endpoint/data_load/*.nt /data/coypu/icews_endpoint/data_backup/'
+                echo '##################### ICEWS Sparql endpoint setup ##################'
+                scp ./knowledge_graph_creation/docker_command_icews.sh node2:/data/coypu/icews_endpoint/;
+                ssh node2 'cd /data/coypu/icews_endpoint/ && ./docker_command_icews.sh >out 2>error &';
+                sleep 60s;
+                ssh node2 'cat /data/coypu/icews_endpoint/out || cat /data/coypu/icews_endpoint/error &';
+                break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+echo '##################### Setting up docker for CoyPU sparql endpoint##################'
+echo '##################### Uploading LEI RDF data files to triple store ##################'
+while true; do
+    read -p "Do you wish to upload RDF data files to triple store?" yn
+    case $yn in
+        [Yy]* ) echo '#####################Copying Graphs Data to Triple Store ##################'
+                rsync -avP generated_rdf_graph_data/lei/*.nt node2:/data/coypu/lei_endpoint/data_load
+                # rsync -avP generated_rdf_graph_data/*.ttl node2:/data/coypu/lei_endpoint/data_load
+
+                echo '##################### Backing-up Graphs Data on Triple Store ##################'
+                rsync ssh 'cp /data/coypu/lei_endpoint/data_load/*.nt /data/coypu/lei_endpoint/data_backup/'
+                echo '##################### Sparql endpoint setup ##################'
+                scp ./knowledge_graph_creation/docker_command_lei.sh node2://data/coypu/lei_endpoint/;
+                ssh node2 'cd /data/coypu/lei_endpoint/ && ./docker_command_lei.sh >out 2>error &';
+                sleep 60s;
+                ssh node2 'cat /data/coypu/lei_endpoint/out || cat /data/coypu/lei_endpoint/error &';
+                break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
 
