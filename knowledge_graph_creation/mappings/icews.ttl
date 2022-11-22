@@ -25,7 +25,7 @@
     
     rr:subjectMap [
         rr:template "https://data.coypu.org/icews/{Event ID}"; 
-        rr:class coy:ICEWSEvent;
+        rr:class coy:Conflict;
     ];
 
     rr:predicateObjectMap [
@@ -34,7 +34,7 @@
     ];
     
 	 rr:predicateObjectMap [
-        rr:predicate coy:hasSourceName;
+        rr:predicate coy:hasSource;
         rr:objectMap [ rml:reference "Source Name"];
     ];
 	
@@ -54,7 +54,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasCAMEOCode;
+        rr:predicate coy:hasCameoCode;
         rr:objectMap [rml:reference "CAMEO Code"];
     ];
 
@@ -64,7 +64,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasTargetName;
+        rr:predicate coy:hasTarget;
         rr:objectMap [rml:reference "Target Name"]
     ];
 
@@ -79,7 +79,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate coy:hasStoryID;
+        rr:predicate coy:hasStoryId;
         rr:objectMap [rr:template "{Story ID}"]
     ];
 

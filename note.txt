@@ -1,5 +1,7 @@
 Test Query
 
+# skynet upload
+scp ./worldbank/*.nt skynet:/data/home/vyas/kg_data/<dir_name>
 # Sort and unq
 # docker exec -it coypu_endpoint bash
 # isql-v
