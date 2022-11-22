@@ -25,7 +25,7 @@
     
     rr:subjectMap [
         rr:template "https://data.coypu.org/icews/{Event ID}"; 
-        rr:class coy:Conflict;
+        rr:class coy:SocioPoliticalEvent;
     ];
 
     rr:predicateObjectMap [
