@@ -103,3 +103,33 @@ headers = {
 }
 response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
+
+
+PREFIX wb: <http://worldbank.org/>
+PREFIX wbi: <http://worldbank.org/Indicator/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX time: <http://www.w3.org/2006/time#> 
+PREFIX coy: <https://schema.coypu.org/global#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+select  distinct ?indicator ?topic ?indicator_label ?note ?publisher
+where {
+           ?indicator a wb:Indicator.
+           Optional{ ?indicator wb:hasTopic ?topic.}
+           Optional{ ?indicator rdfs:label ?indicator_label.}
+           Optional{ ?indicator skos:note ?note.}
+           Optional{ ?indicator dcterms:publisher ?publisher.}
+}
